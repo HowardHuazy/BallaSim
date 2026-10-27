@@ -1,0 +1,52 @@
+# BallaSim development environment (conda-forge only).
+#   conda env create -f tools/env/environment.yml
+# Every C, C++ and CUDA translation unit is compiled with the conda gcc/g++ 14 toolchain below:
+# nvcc 12.8 rejects the system gcc 15, and one extension must not mix two libstdc++ versions (DESIGN §4.4).
+name: ballasim
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.12
+  - pip
+  # numerics and I/O (pyproject.toml lists the runtime subset)
+  - numpy
+  - scipy
+  - pillow
+  - h5py
+  - hdf5plugin
+  - ruamel.yaml
+  # visualization
+  - matplotlib
+  - opencv
+  - imageio
+  - imageio-ffmpeg
+  # The libraries the C++ side links or reads besides Python's (pinned to the installed builds: the scene side calls
+  # OpenBLAS as NumPy and SciPy do and is bitwise equal to them on this build, docs/dev/CPP_PORT.md item 5)
+  - libopenblas=0.3.34=pthreads*
+  - libblas=*=*openblas
+  - hdf5=2.2.0
+  - hdf5plugin=7.1.0
+  - libpng=1.6.58
+  # The format exporters' block codecs (ballasim._export, docs/dev/EXPORT.md); already in the lock as dependencies
+  - lz4-c=1.10.0
+  - zstd=1.5.7
+  - bzip2=1.0.8
+  # C++ dependencies
+  - embree=4.4.1
+  - eigen
+  - doctest
+  # build
+  - cmake>=3.27
+  - ninja
+  - nanobind
+  - scikit-build-core
+  - gcc_linux-64=14
+  - gxx_linux-64=14
+  - cuda-version=12.8
+  - cuda-nvcc=12.8
+  - cuda-cudart-dev=12.8
+  - cuda-cudart-static=12.8
+  # tests
+  - pytest
+  - hypothesis

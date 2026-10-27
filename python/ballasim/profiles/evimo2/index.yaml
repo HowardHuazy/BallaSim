@@ -1,0 +1,17 @@
+# Defaults of `python -m ballasim evimo2` (D5a, P0_PARAMS §3.6): the root profiles, and per camera folder its sensor
+# profile. --no-profiles drops them; --profile and --set add to them.
+root: [evimo2/lab_lighting@v0]
+cameras:
+  left_camera: [evimo2/prophesee_gen3_left@v0]
+  right_camera: [evimo2/prophesee_gen3_right@v0]
+  samsung_mono: [evimo2/samsung_gen3@v0]
+# Other sets, chosen with --profile-set (the top level above is v0, the default and every bench clip's).
+sets:
+  # The round-12 minimal refit for the visual comparison (docs/dev/EVIMO2_V1.md); needs $EVIMO2_COLORFIX_ROOT.
+  v1:
+    normal_light_only: true   # its light level is stated for the lab lights (reference photometry): refused on _ll
+    root: [evimo2/lab_lighting@v1]
+    cameras:
+      left_camera: [evimo2/prophesee_gen3_left@v1]
+      right_camera: [evimo2/prophesee_gen3_right@v1]
+      samsung_mono: [evimo2/samsung_gen3@v1]

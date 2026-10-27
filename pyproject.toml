@@ -1,0 +1,65 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "nanobind>=2.4"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "ballasim"
+dynamic = ["version"]
+description = "An asynchronous, physically grounded event-camera simulator"
+readme = "README.md"
+license = "CC-BY-NC-4.0"
+license-files = ["LICENSE", "NOTICE", "THIRD_PARTY_NOTICES.md"]
+requires-python = ">=3.12"
+# ballasim.traj fits with SciPy's banded and sparse solvers; ballasim.scene reads textures with Pillow
+# and scene and run YAML with ruamel.yaml (run configurations are resolved in C++, ballasim._core.config);
+# ballasim.engine writes Blosc-compressed HDF5 event files with h5py and hdf5plugin.
+dependencies = ["numpy>=2", "scipy>=1.13", "pillow>=10", "ruamel.yaml>=0.17", "h5py>=3.10", "hdf5plugin>=4"]
+
+[project.scripts]
+# The engine's command line (python -m ballasim): run, evimo2, dense, params, resolve, ui, imu, export, job, probe,
+# profiles, blender.
+ballasim = "ballasim.engine.cli:main"
+
+[project.optional-dependencies]
+# ballasim.viz (docs/dev/VIEWER.md). imageio-ffmpeg (H.264 output) stays optional: without it the
+# viewer falls back to ffmpeg/OpenCV.
+viz = ["matplotlib>=3.8", "opencv-python-headless>=4.9"]
+# The browser UI (python -m ballasim ui, docs/design/phase3/ui.md): a Tornado server that uses ballasim.viz.
+ui = ["tornado>=6.4", "ballasim[viz]"]
+# The test suite also covers ballasim.viz and the UI server.
+test = ["pytest>=8", "hypothesis>=6", "ballasim[viz]", "ballasim[ui]"]
+
+[tool.scikit-build]
+minimum-version = "build-system.requires"
+cmake.version = ">=3.27"
+cmake.build-type = "Release"
+build-dir = "build/py-{wheel_tag}"
+wheel.packages = ["python/ballasim"]
+wheel.py-api = "cp312"
+sdist.exclude = ["docs", "build", "tests/**/__pycache__"]
+
+[tool.scikit-build.metadata.version]
+provider = "scikit_build_core.metadata.regex"
+input = "python/ballasim/__init__.py"
+
+[tool.scikit-build.cmake.define]
+BALLASIM_CUDA = { env = "BALLASIM_CUDA", default = "AUTO" }
+BALLASIM_OPTIX = { env = "BALLASIM_OPTIX", default = "AUTO" }
+BALLASIM_EXPORT = { env = "BALLASIM_EXPORT", default = "AUTO" }
+# Passed on every configure, so a reused build directory follows the current environment.
+OPTIX_ROOT = { env = "OPTIX_ROOT", default = "" }
+BALLASIM_BUILD_TESTS = "OFF"
+
+[tool.pytest.ini_options]
+testpaths = ["tests/python"]
+addopts = "-ra --strict-markers"
+markers = [
+  "cuda: needs the _cuda module and a CUDA device",
+  "optix: needs the _optix module, a CUDA device and the OptiX driver runtime",
+  "chrome: needs Google Chrome; headless, with the SwiftShader WebGPU adapter (the UI browser tests, docs/design/phase3/ui.md §8.3)",
+  "slow: over about 10 s (long-run oracles, EVIMO2 rebuilds, host full-frame and lit-scene variants); the fast tier is -m 'not slow'",
+]
+
+[tool.ruff]
+line-length = 120
+src = ["python", "tests/python"]

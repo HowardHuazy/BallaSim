@@ -1,0 +1,34 @@
+format: ballasim.profile/1
+id: evimo2/lab_lighting@v0
+mount: root                         # full keys
+description: >-
+  The EVIMO2 lab lighting and photometry of the P1-M5 runs (frozen, D6): the illuminance scale and the placeholder
+  lights and albedos of the EVIMO2 adapter. Nothing here is identified by a fit to EVIMO2 statistics but the mains
+  amplitude (step 1, conditioned on ambient 1.0).
+valid_for: BallaSim P1-M5 model (EVIMO2 adapter lights, Phase-1 renderer)
+values:
+  cameras.default.photometry.illuminance_scale: {value: 400.0, status: placeholder,
+                                                 source: "P1-M5: puts the tabletop near 100 fA (ENGINE.md, DESIGN §13.4)",
+                                                 known_bias: "identified by no statistic"}
+  scene.evimo2.ambient: {value: 0.3, status: placeholder, source: "P1-M5 calibration step 2 (P1_RESULTS)",
+                         known_bias: "a two-point selection; radiance-equivalent, about 0.94x the direct radiance (factor pi)"}
+  scene.evimo2.ambient_flickers: {value: true, status: placeholder, source: "adapter assumption: the ambient term is mains lit"}
+  scene.evimo2.mains_a: {value: [0.02], status: fitted, source: "P1-M5 calibration step 1 (P1_RESULTS)",
+                         known_bias: "fitted with ambient 1.0; refit after the noise calibration"}
+  scene.evimo2.mains_f0_hz: {value: 120.0, status: data, source: "US mains, twice 60 Hz (G3)"}
+  scene.evimo2.mains_phi_rad: {value: [0.0], status: placeholder, source: "unknown phase"}
+  scene.evimo2.light_height_m: {value: 2.5, status: placeholder,
+                                source: "below the 4.2-4.4 m lab ceiling (G3); adapter LIGHT_HEIGHT_M"}
+  scene.evimo2.light_color: {value: [1.0, 1.0, 1.0], status: placeholder, source: "white light (illuminant unknown)"}
+  scene.evimo2.light_shadows: {value: true, status: placeholder, source: "a point light casts hard shadows"}
+  scene.evimo2.low_light_ambient: {value: 0.05, status: placeholder, source: "adapter LOW_LIGHT_AMBIENT (_ll sequences)"}
+  scene.evimo2.strobe_width_s: {value: 0.3e-3, status: placeholder, source: "Vicon strobe, 0.25 ms plateau + 50 us ramps",
+                                known_bias: "confounded with the photoreceptor bandwidth"}
+  scene.evimo2.strobe_rise_s: {value: 50.0e-6, status: placeholder, source: "adapter assumption"}
+  scene.evimo2.strobe_floor: {value: 0.0, status: placeholder, source: "dark between flashes (adapter assumption)"}
+  scene.evimo2.strobe_phase_offset_s: {value: 0.0, status: placeholder, source: "rises at each re-timed Vicon sample"}
+  scene.evimo2.marker_albedo: {value: 0.8, status: placeholder, source: "Lambert proxy of retro-reflective spheres"}
+  scene.evimo2.untextured_albedo: {value: 0.4, status: placeholder,
+                                   source: "uniform albedo of the untextured catalogue objects (AST-23)"}
+notes: >-
+  The light pose (2.5 m along the tabletop's dominant normal) and the strobe source model are deferred (D13 item 7).

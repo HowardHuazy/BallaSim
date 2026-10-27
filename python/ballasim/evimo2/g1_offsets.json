@@ -1,0 +1,387 @@
+{
+ "_source": "G1's table (docs/research/G1-artifacts/delta_table.json, BallaSim research, MIT): per-(camera, sequence) residual event offset delta of the released EVIMO2 v2 NPZ, defined by t_vicon = t_event_npz + delta (G1 section 2.4), with its jackknife SE; ms. Rows with a 'remeasured' field were re-measured on 2026-10-10 (tools/evimo2_bench, `evb.py g1fix --write`): their sequences start at GT frame id 1 or 2, and G1 keyed the mask/depth archives by the raw frame id instead of id - first id (R6, G3 t13), so its GT was one frame (16.7 ms) late per unit of first id and its delta about -16.7 ms x first id. They were re-measured over the whole sequence on G1's frame budget (100 or 160 GT frames) with the corrected keys: G1's rule (edges.analyze), then the converged fixed point of its +-2 ms collect window, whose SE is the jackknife SE / (1 - window leverage); where that estimator does not identify delta (not converged, or leverage >= 0.9: two sfm_ll rows), the row holds G1's rule with corrected keys and se_ms null. The other rows keep G1's three-round values and window SEs. The left imo_ll/scene16_d_dyn_test_04 row ('unreliable') keeps G1's value with se_ms null: no estimator identifies it (2026-10-11).",
+ "offsets": {
+  "left_camera/imo/scene13_dyn_test_00_000000": {
+   "delta_ms": 2.8,
+   "se_ms": 1.0782
+  },
+  "left_camera/imo/scene13_dyn_test_01_000000": {
+   "delta_ms": -0.6968,
+   "se_ms": 0.417
+  },
+  "left_camera/imo/scene13_dyn_test_02_000000": {
+   "delta_ms": -7.3391,
+   "se_ms": 0.5367
+  },
+  "left_camera/imo/scene13_dyn_test_03_000000": {
+   "delta_ms": -6.7518,
+   "se_ms": 1.0451
+  },
+  "left_camera/imo/scene14_dyn_test_00_000000": {
+   "delta_ms": -7.7055,
+   "se_ms": 0.7722
+  },
+  "left_camera/imo/scene14_dyn_test_05_000000": {
+   "delta_ms": -4.4698,
+   "se_ms": 0.7612
+  },
+  "left_camera/imo/scene15_dyn_test_00_000000": {
+   "delta_ms": 0.7415,
+   "se_ms": 1.0573
+  },
+  "left_camera/imo/scene15_dyn_test_03_000000": {
+   "delta_ms": -2.3926,
+   "se_ms": 0.4202
+  },
+  "left_camera/imo_ll/scene16_d_dyn_test_00_000000": {
+   "delta_ms": 3.9647,
+   "se_ms": 0.5942
+  },
+  "left_camera/imo_ll/scene16_d_dyn_test_02_000000": {
+   "delta_ms": -10.1036,
+   "se_ms": 0.2682
+  },
+  "left_camera/imo_ll/scene16_d_dyn_test_04_000000": {
+   "delta_ms": -47.4929,
+   "se_ms": null,
+   "unreliable": "2026-10-11: G1's value (re-measured exactly by G1's rule, 160 GT frames, first frame id 0) has no converged fixed point: the bench's converged estimator walks to -112.8 ms in 52 rounds. Right (-4.54; converged -3.28 +- 2.27), Samsung (-4.04) and the event scan (+3.5 ms) disagree with it; the mocap is clean (evimo2_gt_quality). se_ms null marks it unusable for timing; the bench treats the span as untimed and clocks.py warns."
+  },
+  "left_camera/sanity/checkerboard_2_tilt_lr_000000": {
+   "delta_ms": -2.0527,
+   "se_ms": 0.1012
+  },
+  "left_camera/sanity/depth_var_0_lr_000000": {
+   "delta_ms": -3.3752,
+   "se_ms": 0.1189
+  },
+  "left_camera/sanity/depth_var_1_lr_000000": {
+   "delta_ms": -1.6341,
+   "se_ms": 0.0865
+  },
+  "left_camera/sanity/tabletop_2_flat_lr_000000": {
+   "delta_ms": -1.7535,
+   "se_ms": 0.312
+  },
+  "left_camera/sanity/tabletop_2_flat_rot_lr_000000": {
+   "delta_ms": 0.2879,
+   "se_ms": 0.0725
+  },
+  "left_camera/sanity/tabletop_2_tilt_lr_000000": {
+   "delta_ms": -0.9346,
+   "se_ms": 0.231
+  },
+  "left_camera/sanity/tabletop_2_tilt_rot_lr_000000": {
+   "delta_ms": -1.385,
+   "se_ms": 0.0464
+  },
+  "left_camera/sanity_ll/checkerboard_d_flat_lr_000000": {
+   "delta_ms": -15.2754,
+   "se_ms": 0.3391
+  },
+  "left_camera/sanity_ll/tabletop_d_tilt_lr_000000": {
+   "delta_ms": -26.7498,
+   "se_ms": 0.2774
+  },
+  "left_camera/sfm/scene13_dyn_test_04_000000": {
+   "delta_ms": 9.3868,
+   "se_ms": 0.7195
+  },
+  "left_camera/sfm/scene7_02_000000": {
+   "delta_ms": -0.2835,
+   "se_ms": 1.6267,
+   "remeasured": "first frame id 1; was -17.0089 +- 0.98 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.4322"
+  },
+  "left_camera/sfm/scene8_03_000000": {
+   "delta_ms": -3.9721,
+   "se_ms": 0.295,
+   "remeasured": "first frame id 1; was -20.7409 +- 0.0905 ms (raw-id GT keys); 100 GT frames, fit orig converged, window leverage 0.721"
+  },
+  "left_camera/sfm/scene_03_00_000000": {
+   "delta_ms": 0.3882,
+   "se_ms": 0.1045
+  },
+  "left_camera/sfm/scene_04_01_000000": {
+   "delta_ms": 0.5894,
+   "se_ms": 0.2999,
+   "remeasured": "first frame id 1; was -16.0315 +- 0.1123 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.5495"
+  },
+  "left_camera/sfm/scene_05_02_000000": {
+   "delta_ms": -0.5407,
+   "se_ms": 0.6287,
+   "remeasured": "first frame id 1; was -17.2756 +- 0.1302 ms (raw-id GT keys); 160 GT frames, fit orig converged, window leverage 0.7322"
+  },
+  "left_camera/sfm/seq_1_1_000000": {
+   "delta_ms": -1.751,
+   "se_ms": 0.222,
+   "remeasured": "first frame id 2; was -34.888 +- 0.1725 ms (raw-id GT keys); 100 GT frames, fit rt converged, window leverage 0.5208"
+  },
+  "left_camera/sfm/seq_2_1_000000": {
+   "delta_ms": -1.2159,
+   "se_ms": 0.3061,
+   "remeasured": "first frame id 1; was -17.9129 +- 0.1742 ms (raw-id GT keys); 100 GT frames, fit orig converged, window leverage 0.5226"
+  },
+  "left_camera/sfm_ll/scene17_d_00_000000": {
+   "delta_ms": 1.5922,
+   "se_ms": 0.4379
+  },
+  "left_camera/sfm_ll/scene17_d_01_000000": {
+   "delta_ms": -11.3758,
+   "se_ms": 0.2061
+  },
+  "left_camera/sfm_ll/scene17_d_02_000000": {
+   "delta_ms": -14.1153,
+   "se_ms": null,
+   "remeasured": "first frame id 1; was -29.0548 +- 0.128 ms (raw-id GT keys); 160 GT frames; G1's rule with corrected keys (rt): the converged estimator does not identify delta here (converged False, window leverage 0.9465)"
+  },
+  "left_camera/sfm_ll/scene17_d_04_000000": {
+   "delta_ms": -11.9914,
+   "se_ms": 0.3333
+  },
+  "right_camera/imo/scene13_dyn_test_00_000000": {
+   "delta_ms": -1.5524,
+   "se_ms": 0.2389
+  },
+  "right_camera/imo/scene13_dyn_test_01_000000": {
+   "delta_ms": -3.6556,
+   "se_ms": 0.5551
+  },
+  "right_camera/imo/scene13_dyn_test_02_000000": {
+   "delta_ms": -0.7132,
+   "se_ms": 1.1624
+  },
+  "right_camera/imo/scene13_dyn_test_03_000000": {
+   "delta_ms": -0.695,
+   "se_ms": 0.4438
+  },
+  "right_camera/imo/scene14_dyn_test_00_000000": {
+   "delta_ms": -6.0928,
+   "se_ms": 0.9338
+  },
+  "right_camera/imo/scene14_dyn_test_05_000000": {
+   "delta_ms": 1.9441,
+   "se_ms": 0.8309
+  },
+  "right_camera/imo/scene15_dyn_test_00_000000": {
+   "delta_ms": -1.7403,
+   "se_ms": 1.378
+  },
+  "right_camera/imo/scene15_dyn_test_03_000000": {
+   "delta_ms": -2.7216,
+   "se_ms": 0.218
+  },
+  "right_camera/imo_ll/scene16_d_dyn_test_00_000000": {
+   "delta_ms": -3.9905,
+   "se_ms": 0.3629
+  },
+  "right_camera/imo_ll/scene16_d_dyn_test_02_000000": {
+   "delta_ms": -8.5818,
+   "se_ms": 0.2458
+  },
+  "right_camera/imo_ll/scene16_d_dyn_test_04_000000": {
+   "delta_ms": -4.5369,
+   "se_ms": 0.8963
+  },
+  "right_camera/sanity/checkerboard_2_tilt_lr_000000": {
+   "delta_ms": 0.3325,
+   "se_ms": 0.1478
+  },
+  "right_camera/sanity/depth_var_0_lr_000000": {
+   "delta_ms": 4.0879,
+   "se_ms": 0.0963
+  },
+  "right_camera/sanity/depth_var_1_lr_000000": {
+   "delta_ms": -0.0507,
+   "se_ms": 0.1354
+  },
+  "right_camera/sanity/tabletop_2_flat_lr_000000": {
+   "delta_ms": -1.43,
+   "se_ms": 0.218
+  },
+  "right_camera/sanity/tabletop_2_flat_rot_lr_000000": {
+   "delta_ms": -1.6622,
+   "se_ms": 0.1559
+  },
+  "right_camera/sanity/tabletop_2_tilt_lr_000000": {
+   "delta_ms": 3.7817,
+   "se_ms": 0.1259
+  },
+  "right_camera/sanity/tabletop_2_tilt_rot_lr_000000": {
+   "delta_ms": 0.8067,
+   "se_ms": 0.0679
+  },
+  "right_camera/sanity_ll/checkerboard_d_flat_lr_000000": {
+   "delta_ms": -2.9236,
+   "se_ms": 0.1297
+  },
+  "right_camera/sfm/scene13_dyn_test_04_000000": {
+   "delta_ms": 3.4065,
+   "se_ms": 1.0659
+  },
+  "right_camera/sfm/scene7_02_000000": {
+   "delta_ms": -0.9096,
+   "se_ms": 0.4724,
+   "remeasured": "first frame id 1; was -17.5065 +- 0.2575 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.3058"
+  },
+  "right_camera/sfm/scene_03_00_000000": {
+   "delta_ms": -1.3965,
+   "se_ms": 0.1003
+  },
+  "right_camera/sfm/scene_04_01_000000": {
+   "delta_ms": -3.4431,
+   "se_ms": 0.2852,
+   "remeasured": "first frame id 1; was -20.0126 +- 0.1766 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.4709"
+  },
+  "right_camera/sfm/scene_05_02_000000": {
+   "delta_ms": 0.2406,
+   "se_ms": 0.3498,
+   "remeasured": "first frame id 1; was -17.0051 +- 0.1216 ms (raw-id GT keys); 160 GT frames, fit orig converged, window leverage 0.6197"
+  },
+  "right_camera/sfm/seq_1_1_000000": {
+   "delta_ms": -1.034,
+   "se_ms": 0.4526,
+   "remeasured": "first frame id 2; was -34.5442 +- 0.1859 ms (raw-id GT keys); 100 GT frames, fit rt converged, window leverage 0.4802"
+  },
+  "right_camera/sfm_ll/scene17_d_00_000000": {
+   "delta_ms": -2.9384,
+   "se_ms": 0.3655
+  },
+  "right_camera/sfm_ll/scene17_d_01_000000": {
+   "delta_ms": -2.3883,
+   "se_ms": 0.1894
+  },
+  "right_camera/sfm_ll/scene17_d_02_000000": {
+   "delta_ms": -3.2861,
+   "se_ms": 0.5227,
+   "remeasured": "first frame id 1; was -27.481 +- 0.0899 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.7625"
+  },
+  "right_camera/sfm_ll/scene17_d_04_000000": {
+   "delta_ms": -5.2195,
+   "se_ms": 0.1678
+  },
+  "samsung_mono/imo/scene10_dyn_train_00_000000": {
+   "delta_ms": 2.3231,
+   "se_ms": 2.7042,
+   "remeasured": "first frame id 1; was -14.463 +- 0.7395 ms (raw-id GT keys); 100 GT frames, fit orig converged, window leverage 0.7363"
+  },
+  "samsung_mono/imo/scene13_dyn_test_00_000000": {
+   "delta_ms": 3.0193,
+   "se_ms": 0.7965
+  },
+  "samsung_mono/imo/scene13_dyn_test_01_000000": {
+   "delta_ms": 1.8286,
+   "se_ms": 0.335
+  },
+  "samsung_mono/imo/scene13_dyn_test_02_000000": {
+   "delta_ms": -1.4258,
+   "se_ms": 0.2266
+  },
+  "samsung_mono/imo/scene13_dyn_test_03_000000": {
+   "delta_ms": 2.0198,
+   "se_ms": 0.3066
+  },
+  "samsung_mono/imo/scene14_dyn_test_00_000000": {
+   "delta_ms": 6.3347,
+   "se_ms": 0.7072
+  },
+  "samsung_mono/imo/scene14_dyn_test_05_000000": {
+   "delta_ms": 0.3469,
+   "se_ms": 0.4883
+  },
+  "samsung_mono/imo/scene15_dyn_test_00_000000": {
+   "delta_ms": -3.8319,
+   "se_ms": 1.0915
+  },
+  "samsung_mono/imo/scene15_dyn_test_03_000000": {
+   "delta_ms": -0.8446,
+   "se_ms": 0.2499
+  },
+  "samsung_mono/imo_ll/scene16_d_dyn_test_00_000000": {
+   "delta_ms": -44.566,
+   "se_ms": 0.4516
+  },
+  "samsung_mono/imo_ll/scene16_d_dyn_test_02_000000": {
+   "delta_ms": -22.9453,
+   "se_ms": 0.4149
+  },
+  "samsung_mono/imo_ll/scene16_d_dyn_test_04_000000": {
+   "delta_ms": -4.0361,
+   "se_ms": 0.1777
+  },
+  "samsung_mono/sanity/checkerboard_2_tilt_lr_000000": {
+   "delta_ms": -3.1175,
+   "se_ms": 0.1842
+  },
+  "samsung_mono/sanity/depth_var_0_lr_000000": {
+   "delta_ms": -1.5365,
+   "se_ms": 0.0755
+  },
+  "samsung_mono/sanity/depth_var_1_lr_000000": {
+   "delta_ms": -1.273,
+   "se_ms": 0.2391
+  },
+  "samsung_mono/sanity/tabletop_2_flat_lr_000000": {
+   "delta_ms": -0.2983,
+   "se_ms": 0.3801
+  },
+  "samsung_mono/sanity/tabletop_2_flat_rot_lr_000000": {
+   "delta_ms": -3.7616,
+   "se_ms": 0.1413
+  },
+  "samsung_mono/sanity/tabletop_2_tilt_lr_000000": {
+   "delta_ms": 1.5001,
+   "se_ms": 0.1509
+  },
+  "samsung_mono/sanity/tabletop_2_tilt_rot_lr_000000": {
+   "delta_ms": -0.546,
+   "se_ms": 0.1466
+  },
+  "samsung_mono/sanity_ll/checkerboard_d_flat_lr_000000": {
+   "delta_ms": -46.9303,
+   "se_ms": null
+  },
+  "samsung_mono/sanity_ll/tabletop_d_tilt_lr_000000": {
+   "delta_ms": -23.4683,
+   "se_ms": null
+  },
+  "samsung_mono/sfm/scene13_dyn_test_04_000000": {
+   "delta_ms": 2.9105,
+   "se_ms": 0.4803
+  },
+  "samsung_mono/sfm/scene7_02_000000": {
+   "delta_ms": -2.3194,
+   "se_ms": 1.314,
+   "remeasured": "first frame id 1; was -18.9508 +- 0.7551 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.4233"
+  },
+  "samsung_mono/sfm/scene_03_00_000000": {
+   "delta_ms": -1.2226,
+   "se_ms": 0.0939
+  },
+  "samsung_mono/sfm/scene_04_01_000000": {
+   "delta_ms": -1.7973,
+   "se_ms": 0.2803,
+   "remeasured": "first frame id 1; was -18.2057 +- 0.0777 ms (raw-id GT keys); 160 GT frames, fit rt converged, window leverage 0.5485"
+  },
+  "samsung_mono/sfm/scene_05_02_000000": {
+   "delta_ms": 0.8361,
+   "se_ms": 0.3252,
+   "remeasured": "first frame id 1; was -17.4931 +- 0.1145 ms (raw-id GT keys); 160 GT frames, fit orig converged, window leverage 0.6797"
+  },
+  "samsung_mono/sfm_ll/scene17_d_00_000000": {
+   "delta_ms": -41.4039,
+   "se_ms": 0.3859
+  },
+  "samsung_mono/sfm_ll/scene17_d_01_000000": {
+   "delta_ms": -27.1914,
+   "se_ms": 0.0367
+  },
+  "samsung_mono/sfm_ll/scene17_d_02_000000": {
+   "delta_ms": -36.6251,
+   "se_ms": null,
+   "remeasured": "first frame id 1; was -27.6874 +- 0.1725 ms (raw-id GT keys); 160 GT frames; G1's rule with corrected keys (rt): the converged estimator does not identify delta here (converged True, window leverage 1.279)"
+  },
+  "samsung_mono/sfm_ll/static_objects_dark_01_000000": {
+   "delta_ms": -9.3556,
+   "se_ms": 0.207
+  }
+ }
+}

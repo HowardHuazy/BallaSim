@@ -1,0 +1,46 @@
+BallaSim
+Copyright (c) 2026 The BallaSim authors. All rights not expressly granted are reserved.
+
+
+LICENCE
+
+Except where a file or THIRD_PARTY_NOTICES.md states otherwise, the material in this repository
+(source code, documentation, figures and media) is licensed under the Creative Commons
+Attribution-NonCommercial 4.0 International Public License (CC BY-NC 4.0).
+
+The full legal code is in the file LICENSE and at
+https://creativecommons.org/licenses/by-nc/4.0/legalcode
+
+
+COMMERCIAL USE
+
+Use primarily intended for or directed towards commercial advantage or monetary compensation
+("NonCommercial", Section 1(i) of the licence) is not permitted under CC BY-NC 4.0. Commercial use
+requires a separate written licence from the rights holders.
+
+
+PATENTS
+
+No patent rights are granted. As Section 2(b)(2) of the licence states, patent and trademark
+rights are not licensed under it. All patent rights in the methods described and implemented in
+this repository are reserved by the rights holders.
+
+
+ATTRIBUTION
+
+When you share this material or material adapted from it, credit it as follows, link to the
+licence, and indicate whether you made changes (Section 3(a) of the licence):
+
+    BallaSim, (c) 2026 The BallaSim authors, licensed under CC BY-NC 4.0.
+    https://github.com/HowardHuazy/BallaSim
+
+
+THIRD-PARTY MATERIAL
+
+Third-party components, data and assets keep their own licences; see THIRD_PARTY_NOTICES.md.
+
+
+NO WARRANTY
+
+The material is provided as-is and as-available, without warranties of any kind; see Section 5 of
+the licence.

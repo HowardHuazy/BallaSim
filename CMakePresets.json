@@ -1,0 +1,149 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 27,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "conda-base",
+      "hidden": true,
+      "description": "Conda toolchain from the activated 'ballasim' environment (gcc/g++ 14 for every TU)",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Linux"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "$env{CONDA_PREFIX}/bin/x86_64-conda-linux-gnu-gcc",
+        "CMAKE_CXX_COMPILER": "$env{CONDA_PREFIX}/bin/x86_64-conda-linux-gnu-g++",
+        "CMAKE_PREFIX_PATH": "$env{CONDA_PREFIX}",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "BALLASIM_BUILD_TESTS": "ON",
+        "BALLASIM_BUILD_PYTHON": "ON",
+        "BALLASIM_WERROR": "ON"
+      }
+    },
+    {
+      "name": "cuda-base",
+      "hidden": true,
+      "inherits": "conda-base",
+      "cacheVariables": {
+        "CMAKE_CUDA_COMPILER": "$env{CONDA_PREFIX}/bin/nvcc",
+        "CMAKE_CUDA_HOST_COMPILER": "$env{CONDA_PREFIX}/bin/x86_64-conda-linux-gnu-g++",
+        "CMAKE_CUDA_ARCHITECTURES": "75",
+        "BALLASIM_CUDA": "ON"
+      }
+    },
+    {
+      "name": "linux-cpu",
+      "displayName": "Linux, CPU only (Embree)",
+      "inherits": "conda-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BALLASIM_CUDA": "OFF",
+        "BALLASIM_OPTIX": "OFF"
+      }
+    },
+    {
+      "name": "linux-cpu-debug",
+      "displayName": "Linux, CPU only, debug",
+      "inherits": "linux-cpu",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0"
+      }
+    },
+    {
+      "name": "linux-cuda",
+      "displayName": "Linux, CUDA kernels without OptiX",
+      "inherits": "cuda-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BALLASIM_OPTIX": "OFF"
+      }
+    },
+    {
+      "name": "linux-cuda-optix",
+      "displayName": "Linux, CUDA + OptiX (requires OPTIX_ROOT)",
+      "inherits": "cuda-base",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "BALLASIM_OPTIX": "ON",
+        "OPTIX_ROOT": "$env{OPTIX_ROOT}"
+      }
+    },
+    {
+      "name": "linux-cuda-optix-debug",
+      "displayName": "Linux, CUDA + OptiX, debug (requires OPTIX_ROOT)",
+      "inherits": "linux-cuda-optix",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_CXX_FLAGS_DEBUG": "-g -O0",
+        "CMAKE_CUDA_FLAGS_DEBUG": "-g -lineinfo -Xcompiler=-O0"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "linux-cpu",
+      "configurePreset": "linux-cpu"
+    },
+    {
+      "name": "linux-cpu-debug",
+      "configurePreset": "linux-cpu-debug"
+    },
+    {
+      "name": "linux-cuda",
+      "configurePreset": "linux-cuda"
+    },
+    {
+      "name": "linux-cuda-optix",
+      "configurePreset": "linux-cuda-optix"
+    },
+    {
+      "name": "linux-cuda-optix-debug",
+      "configurePreset": "linux-cuda-optix-debug"
+    }
+  ],
+  "testPresets": [
+    {
+      "name": "linux-cpu",
+      "configurePreset": "linux-cpu",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-cpu-debug",
+      "configurePreset": "linux-cpu-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-cuda",
+      "configurePreset": "linux-cuda",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-cuda-optix",
+      "configurePreset": "linux-cuda-optix",
+      "output": {
+        "outputOnFailure": true
+      }
+    },
+    {
+      "name": "linux-cuda-optix-debug",
+      "configurePreset": "linux-cuda-optix-debug",
+      "output": {
+        "outputOnFailure": true
+      }
+    }
+  ]
+}

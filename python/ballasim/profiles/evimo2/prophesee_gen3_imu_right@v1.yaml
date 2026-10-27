@@ -1,0 +1,91 @@
+format: ballasim.profile/1
+id: evimo2/prophesee_gen3_imu_right@v1
+mount: camera                       # keys relative to cameras.<camera>
+description: >-
+  EVIMO2 right camera's MPU-9250 IMU, measured on 125 raw EVIMO2 bags (0.67 h per IMU; docs/design/phase3/outputs.md
+  §2.4, §3.2): sample rate and clock, the DLPF, shaped noise, turn-on biases, scale and non-orthogonality in IMU axes,
+  the 16-bit grid of the driver and the IMU frame in the camera frame. Opt-in: apply it to the right camera with
+  `--camera-profile right_camera=evimo2/prophesee_gen3_imu_right@v1`;
+  it is in no index.yaml set, so the v0 and v1 sets and their digests do not move.
+valid_for: >-
+  EVIMO2 recordings of 2020-10-29 to 2020-11-25 (right IMU; the left IMU has its own profile). The turn-on biases
+  and the accelerometer scale and bias are medians or means over the recording days and drift between days.
+values:
+  # Switches, sampling and clock.
+  imu.enabled: {value: true, status: choice, source: "applying this profile switches the camera's IMU on"}
+  imu.rate_hz: {value: 1010.42, status: measured, source: "R-IMU data/timing.json: the median rate over the sequences on the camera clock",
+    data: "125 raw EVIMO2 bags, right IMU (min 1009.40, max 1011.34 Hz)",
+    known_bias: "measured on the camera clock; the true-clock rate differs by the camera drift, 10.6-19.5 ppm (0.011-0.020 Hz), far inside the day-to-day range of 1.7 Hz"}
+  imu.clock_adev: {value: 4.5e-05, status: measured, source: "R-IMU data/timing.json: the fractional-frequency Allan deviation of the sample clock, flat over 0.1-10 s",
+    data: "125 raw EVIMO2 bags, right IMU"}
+  imu.stamp_offset_ns: {value: 0, status: choice, source: "outputs.md Q9: kept at 0 until P2-H measures the simulated pixel latency",
+    known_bias: "the IMU-to-event offset kappa then follows from the simulated pixel latency and the DLPF delay (kappa = L_m - tau_g - this); EVIMO2 measured -1.0 and -1.2 ms in normal light, +6 to +11 ms in low light"}
+  imu.noise_mode: {value: shaped, status: choice, source: "outputs.md §4.4: white noise through the DLPF, the shape the MPU-9250 outputs"}
+  imu.adc_bits: {value: 16, status: measured, source: "R-IMU data/inventory.json: the counts clip at -32768 and +32767"}
+  # The IMU frame in the camera frame: T_cam_imu = [R_imu<-cam^T | p_imu in cam] (Kalibr: X_cam = T X_imu). The IMU frame is
+  # the gyro frame; R_imu<-cam is the chordal mean over 56 high-excitation sequences of the gyro fit composed with the
+  # released rig-to-camera rotation, p the median accelerometer lever fit in the camera frame.
+  imu.T_cam_imu: {value: [-0.999940893188187, 0.0048006124173864346, 0.009755216575235795, 0.003403400774576753, -0.004789291288501182, -0.9999878308747935, 0.0011835502862892976, -0.0026432219936998055, 0.009760779628984336, 0.00113675975664425, 0.9999517163134888, -0.03904788486117247, 0.0, 0.0, 0.0, 1.0], status: measured, source: "R-IMU data/extrinsics_cam.json: R_imu_cam (rotation) and p_imu_in_cam_m (translation)",
+    data: "56 sequences (rotation), 87 (lever); SE of the rotation vector 0.038, 0.030, 0.031 deg, of p 0.82, 0.71, 0.81 mm",
+    known_bias: "the rotation differs from the driver's diag(-1, -1, 1) by the rotation vector (0.07, -0.56, -0.27) deg"}
+  # Gyroscope.
+  imu.gyro.noise_density: {value: 0.0001, status: prior, source: "R-IMU data/psd_dlpf_fit.json and summary.json: the white Allan deviation at 1 s, 9.0e-5 at 20-60 Hz and 1.0-1.3e-4 at 2-20 Hz (left minus right, per sensor)",
+    known_bias: "white AD(1 s) = sigma. Shaped, the per-sample RMS above 10 Hz is 1.64e-3 against 1.478e-3 measured (+11 %). sigma = 9e-5 would give 1.47e-3 but understate AD(1 s) by 10-40 %"}
+  imu.gyro.random_walk: {value: 2.4e-05, status: prior, source: "R-IMU scripts/bias_walk.py: no growth of the between-sequence bias differences from 2 min to 3.3 h",
+    known_bias: "upper bound only: EVIMO2 has no static span (R-IMU bias_walk.py)"}
+  imu.gyro.bias_instability: {value: 0.0001, status: prior, source: "R-IMU data/bias_walk.json and summary.json: the quiet left-minus-right Allan minimum 3.9-7.2e-5 rad/s at 1.5-3 s, still white-limited (B <= minimum / 0.664)",
+    known_bias: "upper bound only: EVIMO2 has no static span (R-IMU bias_walk.py)"}
+  imu.gyro.bias_instability_tau_s: {value: 10.0, status: choice, source: "outputs.md §4.4",
+    known_bias: "placeholder: the AD minimum was not reached"}
+  imu.gyro.bias: {value: [-0.011980198585897502, 0.019499900127918857, -0.011655124083846474], status: measured, source: "R-IMU data/summary.json right.gyro.bias_rad_s: the median turn-on bias (the offset of the per-sequence gyro fit against Vicon)",
+    data: "125 raw EVIMO2 bags, right IMU"}
+  imu.gyro.bias_sd: {value: [0.0017643123425465314, 0.0018867000400311048, 0.0014108857121045736], status: measured, source: "R-IMU data/summary.json right.gyro.bias_rad_s: the standard deviation across sequences",
+    data: "125 raw EVIMO2 bags, right IMU"}
+  imu.gyro.scale: {value: [-0.01106, -0.00649, -0.0025900000000000003], status: measured, source: "R-DOC out/c2_gyro_scale_imu_axes.json: R-IMU's fitted P (rig axes) converted to IMU axes, P_I = U P U^T; the median over the high-excitation sequences",
+    data: "88 sequences; sd across sequences 0.57, 0.44, 0.42 %",
+    known_bias: "in IMU axes. R-IMU's summary.json values are in rig axes (-1.15, -0.59, -0.25 %)"}
+  imu.gyro.nonorth: {value: [-0.0020399999999999997, -0.00074, 0.00095], status: measured, source: "R-DOC out/c2_gyro_scale_imu_axes.json: the off-diagonals (xy, xz, yz) of P_I = U P U^T; the median over the high-excitation sequences",
+    data: "88 sequences; sd across sequences 0.29, 0.32, 0.32 %",
+    known_bias: "in IMU axes. R-IMU's summary.json values are in rig axes (-0.11, -0.06, 0.10 %)"}
+  imu.gyro.misalign_deg: {value: [0.0, 0.0, 0.0], status: choice, source: "the gyro axes define the IMU frame (T_cam_imu)"}
+  imu.gyro.filter: {value: first_order, status: choice, source: "outputs.md §4.3: a first-order low-pass plus a pure delay; the MPU-9250 DLPF_CFG 2 model"}
+  imu.gyro.cutoff_hz: {value: 92.0, status: prior, source: "RM-MPU-9250A-00 r1.6 §4.5 p.13: DLPF_CFG 2, 92 Hz",
+    known_bias: "the real chain falls faster than a first-order low-pass above 200 Hz (outputs.md §2.4, Q10)"}
+  imu.gyro.group_delay_s: {value: 0.0039, status: prior, source: "RM-MPU-9250A-00 r1.6 §4.5 p.13: DLPF_CFG 2, 3.9 ms; the measured gyro-minus-accelerometer delay is 0.980 ms (R-IMU data/lr_acc_delay.json) against the register map's 1.02 ms"}
+  imu.gyro.lsb: {value: 0.00013315805450396192, status: measured, source: "R-IMU data/inventory.json: the driver publishes count x 250/32768 deg/s; this is that quantum in fp64, so the published grid is the driver's (within 0.0011 LSB)"}
+  # Accelerometer.
+  imu.accel.noise_density: {value: 0.0012, status: measured, source: "R-IMU data/lr_acc.json and psd_dlpf_fit.json: 1.1-1.2e-3 m/s^2/sqrt(Hz) at 40-100 Hz (left minus right, per sensor)",
+    known_bias: "the datasheet's 300 ug/sqrt(Hz) is 2.1e-3 m/s^2/sqrt(Hz) one-sided, 1.5e-3 two-sided"}
+  imu.accel.random_walk: {value: 0.005, status: prior, source: "R-IMU scripts/bias_walk.py: growth of the y-axis bias beyond 40 min, confounded with the g-axis scale",
+    known_bias: "upper bound only: EVIMO2 has no static span (R-IMU bias_walk.py)"}
+  imu.accel.bias_instability: {value: 0.0, status: choice, source: "outputs.md §3.2",
+    known_bias: "no accelerometer bias-instability bound was measured (R-IMU)"}
+  imu.accel.bias: {value: [-0.038656289520967085, 0.2654502212968809, 0.22657227891513254], status: measured, source: "R-IMU data/accel_pool.json: the mean over the 5 recording days of the pooled least-squares bias (5 Hz low-pass, lever arm and gravity removed)",
+    data: "111 sequences on 5 days, right IMU",
+    known_bias: "means over 5 recording days; between-day sd up to 0.43 % (scale) and 0.085 m/s² (bias)"}
+  imu.accel.bias_sd: {value: [0.0671037860391983, 0.07569618618982758, 0.041472936538157146], status: measured, source: "R-IMU data/accel_pool.json: the between-day standard deviation of the pooled bias",
+    data: "5 recording days, right IMU"}
+  imu.accel.scale: {value: [-0.006599526659712529, -0.00797469128408781, 0.00421554330884859], status: measured, source: "R-IMU data/accel_pool.json: the unweighted mean over the 5 recording days of the pooled scale (the diagonal of P in A = R_ag P, already in IMU axes)",
+    data: "111 sequences on 5 days, right IMU",
+    known_bias: "means over 5 recording days; between-day sd up to 0.43 % (scale) and 0.085 m/s² (bias)"}
+  imu.accel.nonorth: {value: [0.0011020539883299413, -0.004852002728604016, -0.0008030595698221229], status: measured, source: "R-IMU data/accel_pool.json: the unweighted mean over the 5 recording days of the pooled cross-axis terms (xy, xz, yz of P, in IMU axes)",
+    data: "111 sequences on 5 days, right IMU",
+    known_bias: "means over 5 recording days; between-day sd up to 0.43 % (scale) and 0.085 m/s² (bias)"}
+  imu.accel.misalign_deg: {value: [0.0, 0.0, 0.0], status: choice, source: "outputs.md §3.2",
+    known_bias: "the accelerometer-versus-gyro rotation is 0.1-0.6 deg per recording day (R-IMU accel_pool.json R_ag_deg)"}
+  imu.accel.filter: {value: first_order, status: choice, source: "outputs.md §4.3: the MPU-9250 accelerometer DLPF, A_DLPF_CFG 2"}
+  imu.accel.cutoff_hz: {value: 99.0, status: prior, source: "RM-MPU-9250A-00 r1.6 §4.8 p.15: A_DLPF_CFG 2, 99 Hz"}
+  imu.accel.group_delay_s: {value: 0.00288, status: prior, source: "RM-MPU-9250A-00 r1.6 §4.8 p.15: A_DLPF_CFG 2, 2.88 ms; the gyro group delay minus this is 1.02 ms in the model, 0.980 ms measured (R-IMU data/lr_acc_delay.json)"}
+  imu.accel.lsb: {value: 0.0005987548828125, status: measured, source: "R-IMU data/inventory.json: the driver publishes count x 9.81/16384 m/s^2 (g = 9.81); this is that quantum in fp64, so the grid is the driver's (within 4e-12 LSB)",
+    known_bias: "the 0.034 % gap between the driver's 9.81 and g_n is absorbed in the measured accelerometer scale, which was fitted on published values"}
+notes: >-
+  Axes. `gyro.scale` and `gyro.nonorth` (and the accelerometer's) are in IMU axes, the frame of `T_cam_imu`; R-IMU's
+  summary.json gyro values are in rig axes and differ (the IMU is rotated about z by about 11 deg from the rig).
+  `gyro.misalign_deg` and `accel.misalign_deg` are 0: the accelerometer-versus-gyro rotation (0.1-0.6 deg per day) is
+  inside the between-day spread. Gravity is not in the profile: an EVIMO2 bundle's world is the tabletop frame, so set
+  `imu.gravity_mps2` (tools/imu_bench/evimo2_gravity.py --bundle DIR estimates it in the bundle's world) or accept the
+  warning that names it.
+  Clock. `stamp_offset_ns` is 0 (Q9); the camera's own drift (10.8 ppm left, 18.0 right, G1) is `sensor.clock_drift_ppm`,
+  which the v0 and v1 camera profiles leave at 0.
+  Checks. tools/imu_bench/evimo2_imu_check.py: T5 (the synthetic IMU of a Vicon-fitted rig against the real one), T5b (the
+  frame of the error matrices) and T6 (the noise and the rails) report the residuals this profile is accepted on.

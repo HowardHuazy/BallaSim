@@ -1,0 +1,236 @@
+# BallaSim Phase 1 synthetic scene 1, "Lab tabletop" (docs/research/A-assets-shortlist.md §2).
+#
+# An EVIMO2-like lab: a 6.85 x 7.65 x 4.3 m room (G3's measured EV-IMO footprint) with painted
+# brick walls, a concrete floor and a plaster ceiling; a 2 m metal desk in the middle; six movers,
+# one per EVIMO2 object class (box, can, knife, plane, car, wheel); a desk lamp spot light, an
+# overhead point light, ambient light and a visible bulb flickering at 120 Hz (mains group). The
+# camera uses the EVIMO2 left Prophesee calibration and moves hand-held style: 1 s hold, slow pan
+# and translation, a fast shake (~200 deg/s peaks), then a 1.4 s hold. Duration 8 s.
+#
+# World: metres, +Z up, floor at z = 0, desk top at z = 0.788 m (the Poly Haven desk's height).
+#
+# ASSETS AND ATTRIBUTION (files under ${ASSETS}, default /data/assets; never
+# copied into this repository). All are CC0 or CC BY 4.0; CC BY items require attribution and a
+# note of the changes when renders or derived assets are published:
+#   - Poly Haven (CC0): metal_office_desk, desk_lamp_arm_01, lightbulb_01, rusted_wheel_rim_02,
+#     cardboard_box_01. https://polyhaven.com/license
+#   - ambientCG (CC0, Lennart Demes): PaintedBricks004, Concrete034, PaintedPlaster017.
+#     https://docs.ambientcg.com/license/
+#   - "YCB Object and Model Set, Calli et al., CC BY 4.0" (https://registry.opendata.aws/ycb-benchmarks/):
+#     003_cracker_box, 005_tomato_soup_can, 032_knife, 072-a_toy_airplane (google_64k meshes).
+#   - "Google Scanned Objects, Google Research, CC BY 4.0"
+#     (https://fuel.gazebosim.org/1.0/GoogleResearch/models/CITY_TAXI_POLICE_CAR): CITY_TAXI_POLICE_CAR.
+# Changes made by BallaSim's importer: Y-up to Z-up rotation (glTF), validation (degenerate and
+# duplicate triangles removed), rotation into the body frame and re-centring; the wheel rim is
+# scaled by 0.4; the bulb glass is rendered opaque and emissive (Phase 1 has no transparency).
+# Room texture tile sizes: 1.55 m for PaintedBricks004 (A-assets-shortlist); 2.0 m assumed for
+# Concrete034 and PaintedPlaster017.
+#
+# Keyframes of the tipping box, rolling can, knife flick, airplane arc and car drive are sampled
+# from analytic motions by scenes/lab_tabletop_keys.py (rolling without slipping for the can,
+# rotation about the bottom edge for the box); the fitter interpolates them exactly with K = 6
+# splines and holds (DESIGN §5.4).
+
+schema: ballasim.scene/1
+name: lab_tabletop
+variables:
+  ASSETS: /data/assets
+time: {t_start_s: 0.0, t_end_s: 8.0}
+origin_world_m: [0.0, 0.0, 1.0]
+semantic_classes: {room: 1, furniture: 2, object: 3, fixture: 4}
+
+assets:
+  desk: {path: "${ASSETS}/polyhaven/metal_office_desk/metal_office_desk_2k.gltf", license: CC0-1.0,
+         attribution: "metal_office_desk, Poly Haven"}
+  lamp: {path: "${ASSETS}/polyhaven/desk_lamp_arm_01/desk_lamp_arm_01_2k.gltf", license: CC0-1.0,
+         attribution: "desk_lamp_arm_01, Poly Haven"}
+  bulb: {path: "${ASSETS}/polyhaven/lightbulb_01/lightbulb_01_2k.gltf", license: CC0-1.0,
+         attribution: "lightbulb_01, Poly Haven"}
+  rim: {path: "${ASSETS}/polyhaven/rusted_wheel_rim_02/rusted_wheel_rim_02_2k.gltf", license: CC0-1.0,
+        attribution: "rusted_wheel_rim_02, Poly Haven"}
+  cardboard: {path: "${ASSETS}/polyhaven/cardboard_box_01/cardboard_box_01_2k.gltf", license: CC0-1.0,
+              attribution: "cardboard_box_01, Poly Haven"}
+  cracker: {path: "${ASSETS}/ycb/003_cracker_box/extracted/003_cracker_box/google_64k/textured.obj", scale: 1.0,
+            license: CC-BY-4.0, attribution: "YCB Object and Model Set, Calli et al., CC BY 4.0"}
+  soup_can: {path: "${ASSETS}/ycb/005_tomato_soup_can/extracted/005_tomato_soup_can/google_64k/textured.obj",
+             scale: 1.0, license: CC-BY-4.0, attribution: "YCB Object and Model Set, Calli et al., CC BY 4.0"}
+  knife: {path: "${ASSETS}/ycb/032_knife/extracted/032_knife/google_64k/textured.obj", scale: 1.0,
+          license: CC-BY-4.0, attribution: "YCB Object and Model Set, Calli et al., CC BY 4.0"}
+  airplane: {path: "${ASSETS}/ycb/072-a_toy_airplane/extracted/072-a_toy_airplane/google_64k/textured.obj",
+             scale: 1.0, license: CC-BY-4.0, attribution: "YCB Object and Model Set, Calli et al., CC BY 4.0"}
+  police_car: {path: "${ASSETS}/gso/CITY_TAXI_POLICE_CAR/extracted/meshes/model.obj", scale: 1.0,
+               license: CC-BY-4.0, attribution: "Google Scanned Objects, Google Research, CC BY 4.0"}
+
+materials:
+  bricks: {texture: "${ASSETS}/ambientcg/PaintedBricks004/extracted/PaintedBricks004_2K-JPG_Color.jpg", tile_m: [1.55, 1.55]}
+  concrete: {texture: "${ASSETS}/ambientcg/Concrete034/extracted/Concrete034_2K-JPG_Color.jpg", tile_m: [2.0, 2.0]}
+  plaster: {texture: "${ASSETS}/ambientcg/PaintedPlaster017/extracted/PaintedPlaster017_2K-JPG_Color.jpg", tile_m: [2.0, 2.0]}
+
+room: {name: room, id: 1, semantic: room, size_m: [6.85, 7.65, 4.3], center_m: [0.0, 0.0], cell_m: 0.5,
+       walls: bricks, floor: concrete, ceiling: plaster}
+
+bodies:
+  # Static furniture and fixtures.
+  - {name: desk, id: 2, semantic: furniture, asset: desk, pose: {t_m: [0.0, 0.0, 0.0]}}
+  - {name: cardboard_box, id: 3, semantic: furniture, asset: cardboard, origin: bottom,
+     pose: {t_m: [-1.45, 0.95, 0.0], rpy_deg: [0, 0, 25]}}
+  - {name: desk_lamp, id: 4, semantic: fixture, asset: lamp, origin: bottom,
+     pose: {t_m: [0.85, 0.35, 0.788], rpy_deg: [0, 0, 135]}}
+  - name: bulb
+    id: 5
+    semantic: fixture
+    asset: bulb
+    origin: bottom
+    material_overrides: {0: {emissive: [2.0, 1.8, 1.4]}}   # glass: opaque in Phase 1, so it glows itself
+    pose: {t_m: [-0.80, 0.30, 0.788]}
+
+  # Movers (one per EVIMO2 object class).
+  - name: cracker_box          # box: slid, then tipped over its far bottom edge
+    id: 10
+    semantic: object
+    asset: cracker
+    origin: bottom
+    keyframes:
+      - {t_s: 0.000, t_m: [-0.5500, -0.0800, 0.7880], q_wxyz: [0.707107, 0.000000, 0.000000, 0.707107], hold_s: 1.500}
+      - {t_s: 1.600, t_m: [-0.5463, -0.0790, 0.7880], q_wxyz: [0.705123, 0.000000, 0.000000, 0.709085]}
+      - {t_s: 1.700, t_m: [-0.5262, -0.0738, 0.7880], q_wxyz: [0.694217, 0.000000, 0.000000, 0.719766]}
+      - {t_s: 1.800, t_m: [-0.4867, -0.0635, 0.7880], q_wxyz: [0.672340, 0.000000, 0.000000, 0.740242]}
+      - {t_s: 1.900, t_m: [-0.4350, -0.0500, 0.7880], q_wxyz: [0.642788, 0.000000, 0.000000, 0.766044]}
+      - {t_s: 2.000, t_m: [-0.3833, -0.0365, 0.7880], q_wxyz: [0.612246, 0.000000, 0.000000, 0.790667]}
+      - {t_s: 2.100, t_m: [-0.3438, -0.0262, 0.7880], q_wxyz: [0.588282, 0.000000, 0.000000, 0.808656]}
+      - {t_s: 2.200, t_m: [-0.3237, -0.0210, 0.7880], q_wxyz: [0.575869, 0.000000, 0.000000, 0.817542]}
+      - {t_s: 2.300, t_m: [-0.3200, -0.0200, 0.7880], q_wxyz: [0.573576, 0.000000, 0.000000, 0.819152], hold_s: 0.700}
+      - {t_s: 3.025, t_m: [-0.3200, -0.0200, 0.7882], q_wxyz: [0.573575, -0.002101, 0.001471, 0.819149]}
+      - {t_s: 3.050, t_m: [-0.3200, -0.0200, 0.7893], q_wxyz: [0.573481, -0.014966, 0.010480, 0.819015]}
+      - {t_s: 3.075, t_m: [-0.3201, -0.0198, 0.7919], q_wxyz: [0.572723, -0.044678, 0.031284, 0.817933]}
+      - {t_s: 3.100, t_m: [-0.3203, -0.0191, 0.7961], q_wxyz: [0.569876, -0.092895, 0.065046, 0.813868]}
+      - {t_s: 3.125, t_m: [-0.3209, -0.0175, 0.8016], q_wxyz: [0.562873, -0.157513, 0.110292, 0.803865]}
+      - {t_s: 3.150, t_m: [-0.3220, -0.0145, 0.8076], q_wxyz: [0.549801, -0.233402, 0.163430, 0.785197]}
+      - {t_s: 3.175, t_m: [-0.3236, -0.0101, 0.8134], q_wxyz: [0.529916, -0.313476, 0.219498, 0.756798]}
+      - {t_s: 3.200, t_m: [-0.3256, -0.0047, 0.8181], q_wxyz: [0.504330, -0.390178, 0.273206, 0.720258]}
+      - {t_s: 3.225, t_m: [-0.3276, 0.0010, 0.8213], q_wxyz: [0.475999, -0.457040, 0.320023, 0.679797]}
+      - {t_s: 3.250, t_m: [-0.3295, 0.0061, 0.8230], q_wxyz: [0.448958, -0.509805, 0.356969, 0.641178]}
+      - {t_s: 3.275, t_m: [-0.3309, 0.0101, 0.8237], q_wxyz: [0.427097, -0.546773, 0.382855, 0.609958]}
+      - {t_s: 3.300, t_m: [-0.3318, 0.0125, 0.8239], q_wxyz: [0.412922, -0.568548, 0.398102, 0.589714]}
+      - {t_s: 3.325, t_m: [-0.3322, 0.0136, 0.8239], q_wxyz: [0.406618, -0.577741, 0.404538, 0.580711]}
+      - {t_s: 3.350, t_m: [-0.3323, 0.0137, 0.8239], q_wxyz: [0.405580, -0.579228, 0.405580, 0.579228], hold_s: 4.650}
+  - name: soup_can             # can: rolls without slipping along -x
+    id: 11
+    semantic: object
+    asset: soup_can
+    origin: centroid
+    keyframes:
+      - {t_s: 0.000, t_m: [0.1200, 0.2200, 0.8219], q_wxyz: [0.707107, 0.707107, 0.000000, 0.000000], hold_s: 2.000}
+      - {t_s: 2.050, t_m: [0.1199, 0.2200, 0.8219], q_wxyz: [0.707106, 0.707106, -0.001321, 0.001321]}
+      - {t_s: 2.100, t_m: [0.1190, 0.2200, 0.8219], q_wxyz: [0.707036, 0.707036, -0.010033, 0.010033]}
+      - {t_s: 2.150, t_m: [0.1169, 0.2200, 0.8219], q_wxyz: [0.706378, 0.706378, -0.032100, 0.032100]}
+      - {t_s: 2.200, t_m: [0.1131, 0.2200, 0.8219], q_wxyz: [0.703436, 0.703436, -0.071959, 0.071959]}
+      - {t_s: 2.250, t_m: [0.1072, 0.2200, 0.8219], q_wxyz: [0.694608, 0.694608, -0.132362, 0.132362]}
+      - {t_s: 2.300, t_m: [0.0991, 0.2200, 0.8219], q_wxyz: [0.673987, 0.673987, -0.213871, 0.213871]}
+      - {t_s: 2.350, t_m: [0.0888, 0.2200, 0.8219], q_wxyz: [0.633579, 0.633579, -0.313970, 0.313970]}
+      - {t_s: 2.400, t_m: [0.0761, 0.2200, 0.8219], q_wxyz: [0.564399, 0.564399, -0.425974, 0.425974]}
+      - {t_s: 2.450, t_m: [0.0613, 0.2200, 0.8219], q_wxyz: [0.458572, 0.458572, -0.538248, 0.538248]}
+      - {t_s: 2.500, t_m: [0.0444, 0.2200, 0.8219], q_wxyz: [0.312255, 0.312255, -0.634426, 0.634426]}
+      - {t_s: 2.550, t_m: [0.0258, 0.2200, 0.8219], q_wxyz: [0.128667, 0.128667, -0.695302, 0.695302]}
+      - {t_s: 2.600, t_m: [0.0057, 0.2200, 0.8219], q_wxyz: [0.079916, 0.079916, 0.702576, -0.702576]}
+      - {t_s: 2.650, t_m: [-0.0155, 0.2200, 0.8219], q_wxyz: [0.292482, 0.292482, 0.643781, -0.643781]}
+      - {t_s: 2.700, t_m: [-0.0376, 0.2200, 0.8219], q_wxyz: [0.482598, 0.482598, 0.516816, -0.516816]}
+      - {t_s: 2.750, t_m: [-0.0600, 0.2200, 0.8219], q_wxyz: [0.624225, 0.624225, 0.332180, -0.332180]}
+      - {t_s: 2.800, t_m: [-0.0824, 0.2200, 0.8219], q_wxyz: [0.698249, 0.698249, 0.111569, -0.111569]}
+      - {t_s: 2.850, t_m: [-0.1045, 0.2200, 0.8219], q_wxyz: [0.697353, 0.697353, -0.117043, 0.117043]}
+      - {t_s: 2.900, t_m: [-0.1257, 0.2200, 0.8219], q_wxyz: [0.627374, 0.627374, -0.326194, 0.326194]}
+      - {t_s: 2.950, t_m: [-0.1458, 0.2200, 0.8219], q_wxyz: [0.504820, 0.504820, -0.495133, 0.495133]}
+      - {t_s: 3.000, t_m: [-0.1644, 0.2200, 0.8219], q_wxyz: [0.351771, 0.351771, -0.613398, 0.613398]}
+      - {t_s: 3.050, t_m: [-0.1813, 0.2200, 0.8219], q_wxyz: [0.190263, 0.190263, -0.681029, 0.681029]}
+      - {t_s: 3.100, t_m: [-0.1961, 0.2200, 0.8219], q_wxyz: [0.038023, 0.038023, -0.706084, 0.706084]}
+      - {t_s: 3.150, t_m: [-0.2088, 0.2200, 0.8219], q_wxyz: [0.093522, 0.093522, 0.700895, -0.700895]}
+      - {t_s: 3.200, t_m: [-0.2191, 0.2200, 0.8219], q_wxyz: [0.199118, 0.199118, 0.678492, -0.678492]}
+      - {t_s: 3.250, t_m: [-0.2272, 0.2200, 0.8219], q_wxyz: [0.278243, 0.278243, 0.650062, -0.650062]}
+      - {t_s: 3.300, t_m: [-0.2331, 0.2200, 0.8219], q_wxyz: [0.333274, 0.333274, 0.623642, -0.623642]}
+      - {t_s: 3.350, t_m: [-0.2369, 0.2200, 0.8219], q_wxyz: [0.367977, 0.367977, 0.603815, -0.603815]}
+      - {t_s: 3.400, t_m: [-0.2390, 0.2200, 0.8219], q_wxyz: [0.386647, 0.386647, 0.592034, -0.592034]}
+      - {t_s: 3.450, t_m: [-0.2399, 0.2200, 0.8219], q_wxyz: [0.393912, 0.393912, 0.587225, -0.587225]}
+      - {t_s: 3.500, t_m: [-0.2400, 0.2200, 0.8219], q_wxyz: [0.395009, 0.395009, 0.586488, -0.586488], hold_s: 4.500}
+  - name: knife                # knife: fast flick (125 deg in 0.25 s); 14 mm blade = thin structure
+    id: 12
+    semantic: object
+    asset: knife
+    origin: bottom
+    keyframes:
+      - {t_s: 0.000, t_m: [0.4000, -0.1800, 0.7880], q_wxyz: [1.000000, 0.000000, 0.000000, 0.000000], hold_s: 5.000}
+      - {t_s: 5.050, t_m: [0.3942, -0.1754, 0.7880], q_wxyz: [0.998005, 0.000000, 0.000000, 0.063139]}
+      - {t_s: 5.100, t_m: [0.3683, -0.1546, 0.7880], q_wxyz: [0.940644, 0.000000, 0.000000, 0.339395]}
+      - {t_s: 5.150, t_m: [0.3317, -0.1254, 0.7880], q_wxyz: [0.735388, 0.000000, 0.000000, 0.677646]}
+      - {t_s: 5.200, t_m: [0.3058, -0.1046, 0.7880], q_wxyz: [0.516832, 0.000000, 0.000000, 0.856087]}
+      - {t_s: 5.250, t_m: [0.3000, -0.1000, 0.7880], q_wxyz: [0.461749, 0.000000, 0.000000, 0.887011], hold_s: 2.750}
+  - name: airplane             # plane: hand-carried arc over the desk with +-25 deg roll
+    id: 13
+    semantic: object
+    asset: airplane
+    origin: bottom
+    keyframes:
+      - {t_s: 0.000, t_m: [-0.6000, 0.2500, 0.9000], q_wxyz: [0.707107, 0.000000, 0.000000, -0.707107], hold_s: 1.200}
+      - {t_s: 1.450, t_m: [-0.5999, 0.2476, 0.9024], q_wxyz: [0.729300, 0.005086, 0.004771, -0.684158]}
+      - {t_s: 1.700, t_m: [-0.5963, 0.2333, 0.9167], q_wxyz: [0.838297, 0.040481, 0.026225, -0.543077]}
+      - {t_s: 1.950, t_m: [-0.5686, 0.2021, 0.9479], q_wxyz: [0.941275, 0.125073, 0.041310, -0.310889]}
+      - {t_s: 2.200, t_m: [-0.4742, 0.1581, 0.9919], q_wxyz: [0.965891, 0.207155, 0.032583, -0.151923]}
+      - {t_s: 2.450, t_m: [-0.2781, 0.1171, 1.0329], q_wxyz: [0.981911, 0.177850, 0.011577, -0.063918]}
+      - {t_s: 2.700, t_m: [0.0000, 0.1000, 1.0500], q_wxyz: [1.000000, -0.000000, 0.000000, 0.000000]}
+      - {t_s: 2.950, t_m: [0.2781, 0.1171, 1.0329], q_wxyz: [0.981911, -0.177850, 0.011577, 0.063918]}
+      - {t_s: 3.200, t_m: [0.4742, 0.1581, 0.9919], q_wxyz: [0.965891, -0.207155, 0.032583, 0.151923]}
+      - {t_s: 3.450, t_m: [0.5686, 0.2021, 0.9479], q_wxyz: [0.941275, -0.125073, 0.041310, 0.310889]}
+      - {t_s: 3.700, t_m: [0.5963, 0.2333, 0.9167], q_wxyz: [0.838297, -0.040481, 0.026225, 0.543077]}
+      - {t_s: 3.950, t_m: [0.5999, 0.2476, 0.9024], q_wxyz: [0.729300, -0.005086, 0.004771, 0.684158]}
+      - {t_s: 4.200, t_m: [0.6000, 0.2500, 0.9000], q_wxyz: [0.707107, -0.000000, 0.000000, 0.707107], hold_s: 3.800}
+  - name: police_car           # car: curved drive on the desk
+    id: 14
+    semantic: object
+    asset: police_car
+    origin: bottom
+    keyframes:
+      - {t_s: 0.000, t_m: [-0.1289, -0.0697, 0.7880], q_wxyz: [0.984808, 0.000000, 0.000000, 0.173648], hold_s: 3.500}
+      - {t_s: 3.750, t_m: [-0.1310, -0.0638, 0.7880], q_wxyz: [0.986325, 0.000000, 0.000000, 0.164813]}
+      - {t_s: 4.000, t_m: [-0.1410, -0.0290, 0.7880], q_wxyz: [0.993523, 0.000000, 0.000000, 0.113633]}
+      - {t_s: 4.250, t_m: [-0.1500, 0.0474, 0.7880], q_wxyz: [0.999993, 0.000000, 0.000000, 0.003756]}
+      - {t_s: 4.500, t_m: [-0.1327, 0.1587, 0.7880], q_wxyz: [0.987561, 0.000000, 0.000000, -0.157234]}
+      - {t_s: 4.750, t_m: [-0.0681, 0.2750, 0.7880], q_wxyz: [0.939693, 0.000000, 0.000000, -0.342020]}
+      - {t_s: 5.000, t_m: [0.0352, 0.3588, 0.7880], q_wxyz: [0.857584, 0.000000, 0.000000, -0.514344]}
+      - {t_s: 5.250, t_m: [0.1418, 0.3951, 0.7880], q_wxyz: [0.763625, 0.000000, 0.000000, -0.645660]}
+      - {t_s: 5.500, t_m: [0.2186, 0.3995, 0.7880], q_wxyz: [0.688041, -0.000000, -0.000000, -0.725672]}
+      - {t_s: 5.750, t_m: [0.2546, 0.3957, 0.7880], q_wxyz: [0.649629, -0.000000, -0.000000, -0.760252]}
+      - {t_s: 6.000, t_m: [0.2608, 0.3947, 0.7880], q_wxyz: [0.642788, -0.000000, -0.000000, -0.766044], hold_s: 2.000}
+  - name: wheel_rim            # wheel: spins about its axle (body y) at 2 rev/s on an invisible stand
+    id: 15
+    semantic: object
+    asset: rim
+    scale: 0.4
+    origin: centroid
+    keyframes:
+      - {t_s: 0.0, t_m: [0.72, 0.22, 0.875], rpy_deg: [0, 0, 0], hold_s: 8.0}
+    spin: {t0_s: 1.0, t1_s: 7.0, axis: [0, 1, 0], rate_hz: 2.0, ramp_s: 0.5}
+
+rigs:
+  rig:                         # hand-held camera: hold, pan and translate, shake, hold
+    keyframes:
+      - {t_s: 0.0, eye_m: [-0.15, -1.10, 1.35], target_m: [0.00, 0.05, 0.80], hold_s: 1.0}
+      - {t_s: 2.0, eye_m: [0.05, -1.00, 1.30], target_m: [0.05, 0.05, 0.80]}
+      - {t_s: 3.0, eye_m: [0.30, -0.85, 1.20], target_m: [0.15, 0.10, 0.80]}
+      - {t_s: 4.0, eye_m: [0.40, -0.75, 1.15], target_m: [0.20, 0.10, 0.80], hold_s: 4.0}
+    shake: {t0_s: 4.4, t1_s: 6.6, amplitude_deg: [4.0, 3.5, 2.3], freq_hz: [6.3, 5.1, 3.7], ramp_s: 0.3}
+
+cameras:
+  - {name: left, preset: evimo2_left, rig: rig}
+
+light_groups:
+  mains: {type: fourier, f0_hz: 120.0, a: [0.2], phi: [0.0]}          # 20 % modulation depth
+  strobe: {type: pulse, f_hz: 200.0, duty: 0.06, rise_s: 5.0e-5, phase_s: 0.0, floor: 0.0}   # Vicon-like; no light uses it by default
+
+lights:
+  - {kind: ambient, intensity: 0.15}
+  - {kind: point, position_m: [0.0, -0.4, 3.2], intensity: 9.0}       # overhead
+  - {kind: spot, body: desk_lamp, position_m: [0.0155, 0.184, 0.72], direction: [0.0, 0.3, -1.0],
+     spot_inner_deg: 25, spot_outer_deg: 40, intensity: 1.5, color: [1.0, 0.95, 0.85]}
+  - {kind: point, body: bulb, group: mains, position_m: [0.0, 0.0, 0.12], intensity: 0.4,
+     color: [1.0, 0.85, 0.65]}                                          # 2 cm above the glass
+  # Uncomment for a Vicon-like strobe (scene variant with the 200 Hz pulse group):
+  # - {kind: point, group: strobe, position_m: [0.0, 0.0, 3.5], intensity: 6.0, casts_shadows: false}

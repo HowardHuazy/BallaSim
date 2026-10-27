@@ -1,0 +1,12 @@
+format: ballasim.profile/1
+id: evimo2/release@v0
+mount: root
+description: >-
+  Facts of the EVIMO2 v2 release for the viewer and stats (D16b): the fallback where the scene's light groups and the
+  sequence do not give them.
+valid_for: EVIMO2 v2 release
+values:
+  dataset.evimo2.mains_hz: {value: 120.0, status: data, source: "G3 §2.7"}
+  dataset.evimo2.strobe_hz: {value: 200.0, status: data, source: "G3 §2.7 (the Vicon frame rate)"}
+  dataset.evimo2.gt_lookup_tol_s: {value: 0.01, status: data, source: "EVIMO2 GT at 60 Hz (G3)"}
+  dataset.evimo2.samsung_on_polarity: {value: 0, status: data, source: "G3 §2.8 (inverted polarity)"}

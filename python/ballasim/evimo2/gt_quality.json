@@ -1,0 +1,443 @@
+{
+ "format": "evimo2-gt-quality/1",
+ "_source": "EVIMO2 v2 ground-truth quality review of all 173 sequences (2026-10-10): the sequences, cameras and windows whose pose or event ground truth is unusable.",
+ "semantics": "seqs: fnmatch patterns over <category>/<split>/<sequence>; cameras: limits an entry to those camera folders (default all). bad: refuse to score or calibrate (the bench errors unless --allow-bad, and never scores it). suspect: exclude_cameras are refused like bad. object: drop the named bodies (EVIMO catalogue names) from comparison regions and edge-timing GT; with \"render\": \"drop\" the bench also leaves them out of the render (scene.evimo2.objects), for a body whose fitted track is a hold far from the GT (its orientation branch is rejected where the span lies, so the render would show a phantom). timing: no clock or edge-timing use (the bench marks the span untimed and M11 report-only). flags: GT correct but an assumption broken (reported). clean_spans_s: [[t0, t1], ...] on the true clock where the restriction was checked not to apply; windows_s: the entry applies only to spans overlapping one of these windows (and to whole-sequence use). suspect entries without exclude_cameras are reported as flags.",
+ "bad": [
+  {
+   "seqs": [
+    "imo/train/scene9_dyn_train_02_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "why": "the sequence the user remembered: worst mocap of 173 (pose and meta rank 1), better-flow/evimo#18, 20 of 49 frames without GT; the skeptic confirmed it: tabletop and box_03 jump together at 4.79 and 4.99 s (up to 363 mm / 120 deg), knife_00 38 % missing"
+  },
+  {
+   "seqs": [
+    "imo/train/scene10_dyn_train_03_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "windows_s": [
+    [
+     1.35,
+     1.9
+    ],
+    [
+     4.3,
+     4.35
+    ]
+   ],
+   "why": "skeptic-confirmed windows only: tabletop label swaps 365-1185 mm render 4 GT frames wrong at 1.35-1.90 s (IoU 0.00-0.53 against 0.96), box_03 at 4.30-4.35 s; the other blocks align with the events"
+  },
+  {
+   "seqs": [
+    "imo/train/scene12_dyn_test_00_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "windows_s": [
+    [
+     17.916,
+     17.967
+    ],
+    [
+     24.45,
+     24.484
+    ]
+   ],
+   "why": "skeptic: frame-level only, tabletop swaps rendered into 3 of 1518 GT frames (17.933, 17.950, 24.467 s; windows +- one GT period); the rest is on par with clean references"
+  },
+  {
+   "seqs": [
+    "imo/train/scene12_dyn_test_01_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "windows_s": [
+    [
+     10.65,
+     10.684
+    ]
+   ],
+   "why": "skeptic: frame-level only, 1 of 756 GT frames (10.667 s; window +- one GT period)"
+  },
+  {
+   "seqs": [
+    "sfm_ll/train/static_objects_dark_02_000000"
+   ],
+   "cameras": [
+    "samsung_mono"
+   ],
+   "why": "world-frame table wanders 25-117 mm with 8.9 mm steps; objects up to 220 mm off the table frame at p95",
+   "skeptic": "rejected: camera-frame GT aligns with events better than the sibling dark_01; flag 'not static in world'; kept bad with the synthesis list (not re-decided)"
+  },
+  {
+   "seqs": [
+    "sfm_ll/eval/static_objects_dark_00_000003"
+   ],
+   "why": "box_00 up to 1.40 m / 178 deg off in 9 GT frames; noisiest rig track; the skeptic confirmed it for t < 27.9 s (box_00 absent in the first 34 of 176 GT frames, a +28 ms event offset excursion)"
+  }
+ ],
+ "suspect": [
+  {
+   "seqs": [
+    "imo/train/scene9_dyn_train_01_000000",
+    "imo/train/scene9_dyn_train_02_000000",
+    "imo/train/scene9_dyn_train_06_000000",
+    "imo/train/scene10_dyn_train_00_000000",
+    "imo/train/scene10_dyn_train_01_000000",
+    "imo/train/scene10_dyn_train_02_000000",
+    "imo/train/scene10_dyn_train_03_000000",
+    "imo/train/scene10_dyn_train_04_000000",
+    "imo/train/scene12_dyn_test_00_000000",
+    "imo/train/scene12_dyn_test_01_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "session": "2020-11-24",
+   "why": "session as a whole: all 10 sequences rank in the pose top 29 of 173 and the median jump fraction is 0.018 against <= 0.004 elsewhere, but the skeptic found the glitches concentrated in specific bodies and windows (5 of 10 with a clean tabletop): bad only where confirmed (scene9_dyn_train_02 whole, scene10_dyn_train_03 and scene12 windows), object-level elsewhere"
+  },
+  {
+   "seqs": [
+    "imo/train/scene10_dyn_train_00_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "why": "skeptic: weak confirmation, 2 single-sample tabletop spikes (1 GT frame at 6.583 s wrong), box_03 frame 6.783 s; wheels and car_00 not confirmed by events at any tau while static bodies are"
+  },
+  {
+   "seqs": [
+    "sanity/depth_var/depth_var_1_rot_ud_000000"
+   ],
+   "exclude_cameras": [
+    "left_camera",
+    "right_camera"
+   ],
+   "why": "events miss the GT boundary in all three cameras at 10.6-10.85 s (gyro saturated there); left and right pinned at ~5.8 Mev/s (rate-limited) for the whole sequence; Samsung only with care"
+  }
+ ],
+ "object": [
+  {
+   "seqs": [
+    "sfm/eval/scene_03_02_000001"
+   ],
+   "objects": [
+    "box_03"
+   ],
+   "why": "skeptic: object-level only, box_03 on a discrete wrong branch 1036 mm / 172.6 deg away in 47 of 859 GT frames (up to 0.9 s); camera, tabletop and timing clean (E 2.40 against 1.90 for scene_03_00); synthesis had the recording bad (76 teleports, stamp jitter 1.56 ms)"
+  },
+  {
+   "seqs": [
+    "sfm/eval/scene_03_02_000002",
+    "sfm/eval/scene_03_02_000003"
+   ],
+   "objects": [
+    "box_03"
+   ],
+   "why": "tails of scene_03_02's recording: the skeptic found them clean (0 flagged frames, E 1.97 / 2.50, 0 % below control); box_03 dropped as in _000001, whose wrong branch the synthesis had attributed to them"
+  },
+  {
+   "seqs": [
+    "imo/train/scene9_dyn_train_01_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "objects": [
+    "marker_01",
+    "knife_00"
+   ],
+   "why": "skeptic: tabletop clean; marker_01 1 frame, knife_00 1 spike (2020-11-24 session)"
+  },
+  {
+   "seqs": [
+    "imo/train/scene9_dyn_train_06_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "objects": [
+    "box_00"
+   ],
+   "why": "skeptic: tabletop clean, 0 flagged frames, E 2.45 (the session's best); box_00 spikes"
+  },
+  {
+   "seqs": [
+    "imo/train/scene10_dyn_train_01_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "objects": [
+    "car_00"
+   ],
+   "why": "skeptic: tabletop clean; car_00 wrong in 1 GT frame (4.233 s); wheels unconfirmed after ~4 s"
+  },
+  {
+   "seqs": [
+    "imo/train/scene10_dyn_train_02_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "objects": [
+    "car_00"
+   ],
+   "why": "skeptic: tabletop clean; wheels and car strongly confirmed; car_00 spikes"
+  },
+  {
+   "seqs": [
+    "imo/train/scene10_dyn_train_04_000000"
+   ],
+   "cameras": [
+    "samsung_mono",
+    "flea3_7"
+   ],
+   "objects": [
+    "wheel_00",
+    "wheel_03"
+   ],
+   "why": "skeptic: tabletop clean; wheels confirmed (lift 13-16 against ~2); wheel_00 / wheel_03 spikes"
+  },
+  {
+   "seqs": [
+    "imo/eval/scene13_dyn_test_05_000000"
+   ],
+   "objects": [
+    "drone_00",
+    "drone_01"
+   ],
+   "why": "drone_00 flips in 171 of 486 samples (10 GT frames 180 deg off), drone_01 21 flips"
+  },
+  {
+   "seqs": [
+    "imo_ll/eval/scene16_d_dyn_test_01_000001"
+   ],
+   "objects": [
+    "drone_01"
+   ],
+   "why": "16 flips, 4.0 mrad jitter"
+  },
+  {
+   "seqs": [
+    "imo/train/scene15_dyn_test_06_000000"
+   ],
+   "objects": [
+    "drone_00",
+    "drone_01"
+   ],
+   "why": "up to 34 and 25 flipped samples"
+  },
+  {
+   "seqs": [
+    "imo/train/scene15_dyn_test_04_000000"
+   ],
+   "objects": [
+    "drone_00"
+   ],
+   "why": "bench A7: the adapter's largest drone_00 orientation branch holds only 34 % of its samples; within the span 1.74-2.23 s (99 samples) is rejected and bridged while drone_00 moves 267 mm (branch check, 2026-10-11)"
+  },
+  {
+   "seqs": [
+    "imo/train/scene15_dyn_test_04_000000"
+   ],
+   "objects": [
+    "drone_01"
+   ],
+   "render": "drop",
+   "windows_s": [
+    [
+     0.0,
+     3.87
+    ],
+    [
+     7.41,
+     9.35
+    ]
+   ],
+   "why": "bench A7: drone_01's Vicon orientation flips between two near-equal branches (906 of 1826 samples are the minority branch, 28 steps above 45 deg at 2.70-3.73 s and 7.66-7.76 s) and the fit keeps 3.32-7.66 s only, with the drone sitting still from 3.87 s to 7.41 s. Outside that its pose is a hold: before 3.34 s the pose of 3.32 s, 0.8-1.0 m (about 470 px in the left camera) from where the GT masks show the drone (visible from 1.65 s; A7's whole span 0.42-2.42 s lies there while the drone moves 214 mm), and after 7.68 s a pose about 17 mm and 18 deg or more from the raw Vicon pose of 8.0-9.35 s. The windows are the fit's own holds and transitions (0.02-3.87 s, 7.41-9.37 s); the still stretch between them is sound (branch check, 2026-10-15). The bench renders such a span without drone_01"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene8_03_000000"
+   ],
+   "objects": [
+    "drone_00"
+   ],
+   "why": "bench B4: drone_00 samples 0.04-0.98 s are a rejected minority branch, bridged for 0.9 s of the 1 s span while drone_00 moves 122 mm (branch check, 2026-10-11)"
+  },
+  {
+   "seqs": [
+    "sfm/eval/scene_03_00_000000"
+   ],
+   "objects": [
+    "drone_00"
+   ],
+   "why": "165 flipped samples (27 flips), 10 GT frames 180 deg off; better-flow/evimo#28 (flow over 1500 px from mocap jumps)"
+  },
+  {
+   "seqs": [
+    "imo/eval/scene15_dyn_test_01_000000"
+   ],
+   "objects": [
+    "drone_01"
+   ],
+   "why": "2 flips; off its median branch 0.02-1.93 s"
+  },
+  {
+   "seqs": [
+    "sfm/eval/scene_03_03_000000",
+    "sfm/eval/scene_03_03_000001",
+    "sfm/eval/scene_03_03_000002"
+   ],
+   "objects": [
+    "box_03"
+   ],
+   "why": "teleports up to 1 m; scene_03_03_000000 holds the spreadsheet's only 'invalid' interval"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene7_03_000001",
+    "sfm/train/scene7_03_000003"
+   ],
+   "objects": [
+    "box_00",
+    "marker_02"
+   ],
+   "why": "teleports up to 1 m, 23-115 glitch samples"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene7_02_*"
+   ],
+   "objects": [
+    "box_00"
+   ],
+   "why": "teleports up to 1 m"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene_04_04_000000"
+   ],
+   "objects": [
+    "plane_00"
+   ],
+   "why": "teleports"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene_04_00_000002"
+   ],
+   "objects": [
+    "checkerboard"
+   ],
+   "why": "teleports"
+  },
+  {
+   "seqs": [
+    "sanity/depth_var/depth_var_0_fb_000000",
+    "sanity/depth_var/depth_var_0_lr_000000",
+    "sanity/depth_var/depth_var_0_ud_000000",
+    "sanity/depth_var/depth_var_0_rot_lr_000000",
+    "sanity/depth_var/depth_var_0_rot_z_000000"
+   ],
+   "objects": [
+    "checkerboard"
+   ],
+   "clean_spans_s": [
+    [
+     0.08,
+     1.08
+    ]
+   ],
+   "why": "checkerboard (id 9) >20 mm off in up to 14.6 % of samples (_lr: 45 of 689 GT frames; _ud: 5 teleports up to 538 mm); the bench's B2 span 0.08-1.08 s on depth_var_0_lr is clean (synth/span_events.jsonl)"
+  }
+ ],
+ "timing": [
+  {
+   "seqs": [
+    "imo/eval/scene13_dyn_test_05_000000"
+   ],
+   "clean_spans_s": [
+    [
+     0.0,
+     3.1
+    ]
+   ],
+   "why": "left per-frame tau jumps to +12..+58 ms after 3.1 s; block offsets wander -2 ms/s"
+  },
+  {
+   "seqs": [
+    "imo_ll/eval/scene16_d_dyn_test_01_000001"
+   ],
+   "why": "L/R coarse offsets +15.5 vs -29.5 ms; 65 % of left moving frames below the control"
+  },
+  {
+   "seqs": [
+    "imo_ll/eval/scene16_d_dyn_test_04_000000"
+   ],
+   "cameras": [
+    "left_camera"
+   ],
+   "why": "G1 left -47.5 +- 2.29 ms against right -4.5, Samsung -4.0, event scan +3.5; the converged estimator finds no fixed point (walks to -112.8 ms): g1_offsets.json's row has se_ms null"
+  },
+  {
+   "seqs": [
+    "sfm/train/scene13_dyn_test_04_000000",
+    "sfm/train/scene13_dyn_test_04_000001"
+   ],
+   "why": "highest gyro/Vicon noise ratio among moving-camera sequences; L-R offset gap +6 ms; G1 blocks drift -3..-5 ms/s"
+  },
+  {
+   "seqs": [
+    "imo/train/scene15_dyn_test_00_000000"
+   ],
+   "why": "slow motion (24 px/s): offset unidentified, left G1 blocks span +76..-22 ms"
+  },
+  {
+   "seqs": [
+    "sfm/*/scene_05_*"
+   ],
+   "why": "Vicon stamp residual 1.27 ms with 60-100 Vicon gaps"
+  },
+  {
+   "seqs": [
+    "imo_ll/*/*",
+    "sfm_ll/*/*",
+    "sanity_ll/*/*"
+   ],
+   "why": "G1 and the event scan disagree by 5-50 ms; the lowest tau contrast in the dataset"
+  }
+ ],
+ "flags": [
+  {
+   "seqs": [
+    "imo/train/scene6_dyn_train_03_000000"
+   ],
+   "flag": "scene_not_static",
+   "why": "the tabletop was physically moved about 93 mm (0.65-0.90 s) and back (1.20-1.40 s); GT tracks it; no GT frames 1.05-1.45 s"
+  }
+ ],
+ "object_policy": "Symmetric bodies (drone_00, drone_01, wheel_00..03, can_00) flip by pi in 74 sequences: rely on the adapter's orientation-branch rejection (traj/fit.py gate G-a, minority_branches) and check num_branch_rejected in the bundle's warnings; list a body here when a span depends on a long bridged gap.",
+ "ok_short_fast": [
+  "imo/eval/scene14_dyn_test_04_000000",
+  "imo/eval/scene14_dyn_test_05_000000",
+  "imo/eval/scene15_dyn_test_02_000000"
+ ]
+}

@@ -1,0 +1,65 @@
+# --- build artifacts ---
+build/
+build-*/
+cmake-build-*/
+_skbuild/
+dist/
+*.egg-info/
+*.so
+*.dylib
+*.dll
+*.o
+*.a
+*.ptx
+*.optixir
+compile_commands.json
+
+# --- python ---
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.venv/
+.venv-docs/
+venv/
+
+# --- simulation outputs, caches and large data (never commit) ---
+out/
+outputs/
+runs/
+# the evimo2 bench's engine drivers (P2-H EB4, H2), not run outputs
+!tools/evimo2_bench/runs/
+cache/
+.cache/
+scratch/
+tmp/
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.exr
+*.bag
+*.raw
+*.mp4
+*.zip
+*.tar
+*.tar.gz
+assets/downloads/
+assets/large/
+
+# --- editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# local preview server config and agent worktrees
+.*/launch.json
+.*/worktrees/
+
+# shared contract files: the golden Blender exchanges keep their arrays (schema/README.md)
+!schema/golden/**/*.npz
+!schema/golden/**/*.npy

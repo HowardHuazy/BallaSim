@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:,">
+<title>BallaSim</title>
+<style>
+:root { color-scheme: light dark; --bg: #fafafa; --fg: #1d1d1f; --muted: #6b6b70; --line: #d9d9de;
+        --warn-bg: #fff4d6; --warn-fg: #6b4a00; --err-bg: #fde2e1; --err-fg: #8a1c14; --accent: #2457c5; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #16171a; --fg: #e8e8ea; --muted: #9a9aa2; --line: #33343a;
+          --warn-bg: #3a2f10; --warn-fg: #f3d27a; --err-bg: #3d1716; --err-fg: #f2a19b; --accent: #8fb0ff; }
+}
+body { margin: 0; font: 14px/1.45 system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+header { display: flex; gap: 16px; align-items: baseline; padding: 10px 16px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 16px; margin: 0; }
+header nav a { color: var(--accent); margin-right: 12px; text-decoration: none; }
+.muted, th { color: var(--muted); }
+#banners > div { padding: 8px 16px; border-bottom: 1px solid var(--line); }
+.warn { background: var(--warn-bg); color: var(--warn-fg); }
+.error { background: var(--err-bg); color: var(--err-fg); }
+main { padding: 16px; max-width: 1100px; }
+main.wide { max-width: none; }
+table { border-collapse: collapse; margin-bottom: 16px; }
+td, th { text-align: left; padding: 3px 14px 3px 0; vertical-align: top; font-weight: normal; }
+pre, code { font: 12px/1.4 ui-monospace, monospace; }
+pre { padding: 10px; border: 1px solid var(--line); overflow: auto; }
+.spacer { flex: 1; }
+.state { display: inline-block; padding: 0 6px; border-radius: 3px; border: 1px solid var(--line); font-size: 12px; }
+.state-complete, .state-done { color: #2e7d32; border-color: #2e7d32; }
+.state-failed, .state-interrupted, .state-stale { color: var(--err-fg); background: var(--err-bg); }
+.state-running, .state-live, .state-loading, .state-previewing, .state-exec, .state-starting { color: var(--accent);
+  border-color: var(--accent); }
+.state-waiting, .state-stalled, .state-held, .state-queued { color: var(--warn-fg); background: var(--warn-bg); }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: 12px 0; }
+.tabs button { border: 1px solid var(--line); border-bottom: none; background: none; color: var(--fg); padding: 4px 12px;
+  cursor: pointer; }
+.tabs button[aria-selected="true"] { background: var(--line); }
+button[aria-pressed="true"] { outline: 2px solid var(--accent); }
+pre.log { max-height: 420px; white-space: pre-wrap; }
+progress { width: 320px; vertical-align: middle; }
+table.record td, table.listing td, table.jobs td { padding-right: 18px; }
+p.warn, p.error, span.error { padding: 4px 8px; }
+.warn:empty, .error:empty { display: none; }
+</style>
+<script type="module" src="/static/app/main.js"></script>
+</head>
+<body data-page="shell">
+<header>
+  <h1>BallaSim</h1>
+  <nav><a href="#/">Server</a><a href="#/runs">Runs</a><a href="#/setup">Setup</a><a href="#/view">Viewer</a><a href="#/compare">Real vs sim</a><a href="#/check">Browser check</a></nav>
+  <span id="server" class="muted"></span>
+  <span class="spacer"></span>
+  <button id="signout" hidden>Sign out</button>
+</header>
+<div id="banners"></div>
+<main id="view"><noscript>The BallaSim UI needs JavaScript (Chrome or Chromium 147 or newer).</noscript></main>
+</body>
+</html>

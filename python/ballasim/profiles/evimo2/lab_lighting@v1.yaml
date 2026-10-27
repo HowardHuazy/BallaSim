@@ -1,0 +1,43 @@
+format: ballasim.profile/1
+id: evimo2/lab_lighting@v1
+mount: root                         # full keys
+description: >-
+  The EVIMO2 lab scene of the round-12 minimal refit for the visual comparison (EVIMO2_V1.md): v0's lights with the
+  mains amplitude refitted, fainter marker spheres, a backdrop for the misses, the colour-fixed object catalogue and
+  the image-space hold rule. The light level is stated per camera (the sensor profiles).
+valid_for: BallaSim round 12 (reference photometry with vignetting, veiling glare, background radiance); normal-light sequences only
+values:
+  scene.evimo2.ambient: {value: 0.3, status: placeholder, source: "v0 (P1-M5 calibration step 2, P1_RESULTS)",
+                         known_bias: "a two-point selection, not refitted; radiance-equivalent, about 0.94x the direct radiance (factor pi)"}
+  scene.evimo2.ambient_flickers: {value: true, status: placeholder, source: "adapter assumption: the ambient term is mains lit"}
+  scene.evimo2.mains_a: {value: [0.0064], status: fitted,
+                         source: "EVIMO2_V1.md: the 120 Hz line of ON - OFF per event (R8 §2.5), real 0.046",
+                         data: "imo/train scene13_dyn_test_02, left, 1.5-2.5 s, table-only region",
+                         known_bias: "conditioned on the stated light level (x3 photocurrent: +57 %) and ambient 0.3; v0 (0.02) gave 2.9x the real line. An effective value for the Prophesee (lamp depth x its 120 Hz transfer): the Samsung's real line is 0.247 on the same span (R8 §2.5: the sensors' |H(2 pi 120)|), v1 gives it 0.043; not valid for the Samsung"}
+  scene.evimo2.mains_f0_hz: {value: 120.0, status: data, source: "US mains, twice 60 Hz (G3)"}
+  scene.evimo2.mains_phi_rad: {value: [0.0], status: placeholder, source: "unknown phase"}
+  scene.evimo2.light_height_m: {value: 2.5, status: placeholder,
+                                source: "below the 4.2-4.4 m lab ceiling (G3); adapter LIGHT_HEIGHT_M"}
+  scene.evimo2.light_color: {value: [1.0, 1.0, 1.0], status: placeholder, source: "white light (illuminant unknown)"}
+  scene.evimo2.light_shadows: {value: true, status: placeholder, source: "a point light casts hard shadows"}
+  scene.evimo2.low_light_ambient: {value: 0.05, status: placeholder, source: "adapter LOW_LIGHT_AMBIENT (_ll sequences)"}
+  scene.evimo2.strobe_width_s: {value: 0.3e-3, status: placeholder, source: "Vicon strobe, 0.25 ms plateau + 50 us ramps",
+                                known_bias: "confounded with the photoreceptor bandwidth"}
+  scene.evimo2.strobe_rise_s: {value: 50.0e-6, status: placeholder, source: "adapter assumption"}
+  scene.evimo2.strobe_floor: {value: 0.0, status: placeholder, source: "dark between flashes (adapter assumption)"}
+  scene.evimo2.strobe_phase_offset_s: {value: 0.0, status: placeholder, source: "rises at each re-timed Vicon sample"}
+  scene.evimo2.marker_albedo: {value: 0.4, status: fitted,
+                               source: "EVIMO2_V1.md: events on the marker footprint over the markers-off run, real 0.67 (0.1: 0.52, 0.3: 0.55, 0.8: 0.93; log-interpolated)",
+                               data: "imo/train scene13_dyn_test_02, left, 1.5-2.5 s, table-only region",
+                               known_bias: "a Lambert proxy of retro-reflectors; the footprint holds the static table markers too. An absolute footprint count: the sim's 1.2x table-rate excess pulls it down (the share of each stream's own table events gives about 0.6)"}
+  scene.evimo2.untextured_albedo: {value: 0.4, status: placeholder,
+                                   source: "uniform albedo of the catalogue objects without colour (AST-23); only the wand in the colour-fixed catalogue"}
+  scene.evimo2.background_albedo: {value: 0.33, status: choice,
+                                   source: "EVIMO2_V1.md: the colour-fixed tabletop's median rendered radiance (0.10) over the ambient 0.3, as round 10's figure",
+                                   known_bias: "removes the black-void contrast only; no room geometry"}
+  scene.evimo2.objects_root: {value: "${EVIMO2_COLORFIX_ROOT}/.tools/evimo/evimo/objects", status: choice,
+                              source: "D13 item 4: the colour-fixed catalogue (its README); the variable names the machine's copy (unset: an error)"}
+  scene.trajectory.hold_rule: {value: image, status: choice,
+                               source: "F090 (SCENE.md): its gate passes (1 and 5 deg/s pans within 1 % of the no-hold events, rests held); sphere freezes pans below ~1-2 deg/s"}
+notes: >-
+  The light pose (2.5 m along the tabletop's dominant normal) and the strobe source model are deferred (D13 item 7).

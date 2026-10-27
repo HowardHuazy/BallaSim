@@ -1,0 +1,636 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "https://github.com/HowardHuazy/BallaSim/schema/blender_exchange-1.json",
+ "$comment": "SPDX-License-Identifier: CC0-1.0. A shared contract file of the BallaSim engine and the BallaSim Bridge add-on (BallaSim docs/design/phase3/blender.md section 3.4): exchange.json of ballasim.blender_exchange 1.0. Version 1.0 keys only: a reader of 1.0 refuses unknown keys (newer minors add optional keys and are read with additionalProperties ignored). Records written as Blender holds them (node props, waveforms, F-curve modifiers, extras) are free-form. Validated by schema/validate.py (a JSON Schema 2020-12 subset, standard library only).",
+ "title": "ballasim.blender_exchange 1.0",
+ "type": "object",
+ "required": ["format", "version", "producer", "units", "time", "span", "meshes", "objects", "cameras"],
+ "additionalProperties": false,
+ "properties": {
+  "format": {"const": "ballasim.blender_exchange"},
+  "version": {"type": "array", "prefixItems": [{"const": 1}, {"type": "integer", "minimum": 0}], "minItems": 2, "maxItems": 2},
+  "producer": {
+   "type": "object",
+   "properties": {
+    "addon": {"type": "string"},
+    "blender": {"type": "string"},
+    "blend_file": {"type": ["string", "null"]},
+    "blend_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "exported": {"type": "string"}
+   },
+   "additionalProperties": false
+  },
+  "units": {
+   "type": "object",
+   "properties": {"system": {"type": "string"}, "scale_length": {"type": "number", "exclusiveMinimum": 0}},
+   "additionalProperties": false
+  },
+  "color": {
+   "type": "object",
+   "properties": {
+    "scene_linear": {"type": ["string", "null"]},
+    "display_device": {"type": ["string", "null"]},
+    "view_transform": {"type": ["string", "null"]}
+   },
+   "additionalProperties": false
+  },
+  "time": {
+   "type": "object",
+   "properties": {
+    "fps": {"type": "integer", "minimum": 1},
+    "fps_base_bits": {"type": "string", "pattern": "^0x[0-9a-f]{8}$"},
+    "frame_start": {"type": "integer"},
+    "frame_end": {"type": "integer"},
+    "frame_map_old": {"type": "integer", "minimum": 1},
+    "frame_map_new": {"type": "integer", "minimum": 1}
+   },
+   "additionalProperties": false
+  },
+  "span": {
+   "type": "object",
+   "properties": {"frame_start": {"type": "integer"}, "frame_end": {"type": "integer"}},
+   "required": ["frame_start", "frame_end"],
+   "additionalProperties": false
+  },
+  "render": {
+   "type": "object",
+   "properties": {
+    "resolution_x": {"type": "integer"},
+    "resolution_y": {"type": "integer"},
+    "resolution_percentage": {"type": "integer"},
+    "pixel_aspect_x": {"type": "number"},
+    "pixel_aspect_y": {"type": "number"},
+    "use_border": {"type": "boolean"},
+    "use_simplify": {"type": "boolean"},
+    "rolling_shutter_type": {"type": ["string", "null"]},
+    "rolling_shutter_duration": {"type": ["number", "null"]},
+    "use_motion_blur": {"type": "boolean"},
+    "motion_blur_shutter": {"type": "number"},
+    "motion_blur_position": {"type": ["string", "null"]},
+    "view_transform": {"type": "string"},
+    "look": {"type": "string"},
+    "exposure": {"type": "number"},
+    "gamma": {"type": "number"},
+    "film_exposure": {"type": ["number", "null"]},
+    "max_bounces": {"type": ["integer", "null"]},
+    "use_denoising": {"type": ["boolean", "null"]},
+    "pixel_filter_type": {"type": ["string", "null"]},
+    "filter_width": {"type": ["number", "null"]}
+   },
+   "additionalProperties": false
+  },
+  "gravity": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+  "use_gravity": {"type": "boolean"},
+  "rigidbody_world": {
+   "anyOf": [
+    {"type": "null"},
+    {
+     "type": "object",
+     "properties": {
+      "enabled": {"type": "boolean"},
+      "substeps_per_frame": {"type": "integer"},
+      "solver_iterations": {"type": "integer"},
+      "time_scale": {"type": "number"},
+      "collection": {"type": ["string", "null"]},
+      "effector_weights": {
+       "type": "object",
+       "properties": {"gravity": {"type": "number"}, "all": {"type": "number"}, "collection": {"type": ["string", "null"]}},
+       "additionalProperties": false
+      },
+      "point_cache": {
+       "type": "object",
+       "properties": {
+        "frame_start": {"type": "integer"},
+        "frame_end": {"type": "integer"},
+        "frame_step": {"type": "integer"},
+        "is_baked": {"type": "boolean"},
+        "is_outdated": {"type": "boolean"},
+        "use_disk_cache": {"type": "boolean"},
+        "info": {"type": "string"}
+       },
+       "additionalProperties": false
+      }
+     },
+     "additionalProperties": false
+    }
+   ]
+  },
+  "meshes": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {"type": "string", "pattern": "^[A-Za-z0-9_-]+$"},
+     "sha256": {"type": "string"},
+     "normals_domain": {"enum": ["POINT", "FACE", "CORNER"]},
+     "counts": {
+      "type": "object",
+      "properties": {
+       "V": {"type": "integer", "minimum": 0},
+       "C": {"type": "integer", "minimum": 0},
+       "T": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+     },
+     "uv_maps": {"type": "array", "items": {"type": "string"}},
+     "active_render_uv": {"type": ["string", "null"]},
+     "arrays": {
+      "type": "object",
+      "properties": {
+       "co": {"type": "string"},
+       "corner_vert": {"type": "string"},
+       "tri_corners": {"type": "string"},
+       "tri_mat": {"type": "string"},
+       "corner_normal": {"type": "string"},
+       "vert_normal": {"type": "string"},
+       "uv": {"type": "object", "additionalProperties": {"type": "string"}}
+      },
+      "required": ["co", "corner_vert", "tri_corners"],
+      "additionalProperties": false
+     },
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["id", "arrays"],
+    "additionalProperties": false
+   }
+  },
+  "images": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {"type": "string"},
+     "file": {"type": ["string", "null"], "pattern": "^textures/[0-9a-f]{64}\\.npy$", "$comment": "null: no pixels (a missing file, or a TILED, SEQUENCE, MOVIE or VIEWER image, whose pixels are one tile or frame); refused where a material uses it (TEX-CS)"},
+     "kind": {"enum": ["byte", "float"]},
+     "colorspace": {"type": "string"},
+     "alpha_mode": {"type": "string"},
+     "width": {"type": "integer", "minimum": 0},
+     "height": {"type": "integer", "minimum": 0},
+     "channels": {"type": "integer", "minimum": 0},
+     "extension": {"type": ["string", "null"]},
+     "interpolation": {"type": ["string", "null"]},
+     "source_path": {"type": ["string", "null"]},
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["id"],
+    "additionalProperties": false
+   }
+  },
+  "materials": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "id": {"type": "string"},
+     "name": {"type": "string"},
+     "emission_sampling": {"type": ["string", "null"]},
+     "graph": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/graph"}]},
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["id"],
+    "additionalProperties": false
+   }
+  },
+  "objects": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "key": {
+      "anyOf": [
+       {"type": "array", "prefixItems": [{"type": "string"}], "minItems": 1, "maxItems": 1},
+       {
+        "type": "array",
+        "prefixItems": [
+         {"type": "string"},
+         {"type": "string"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"},
+         {"type": "integer"}
+        ],
+        "minItems": 10,
+        "maxItems": 10
+       }
+      ]
+     },
+     "name_full": {"type": "string"},
+     "library": {"type": ["string", "null"]},
+     "kind": {"enum": ["object", "instance"]},
+     "type": {"type": "string"},
+     "instancer": {"type": ["integer", "null"], "minimum": 0},
+     "persistent_id": {"type": "array", "items": {"type": "integer"}, "minItems": 8, "maxItems": 8},
+     "instance_object": {"type": ["integer", "null"], "minimum": 0},
+     "parent": {"type": ["integer", "null"], "minimum": 0},
+     "parent_type": {"type": "string"},
+     "parent_bone": {"type": "string"},
+     "mesh": {"type": ["integer", "null"], "minimum": 0},
+     "material_slots": {"type": "array", "items": {"type": ["integer", "null"], "minimum": 0}},
+     "matrix_world": {"type": "array", "items": {"type": "number"}, "minItems": 16, "maxItems": 16},
+     "visibility": {
+      "type": "object",
+      "properties": {
+       "render": {"type": "boolean"},
+       "camera": {"type": "boolean"},
+       "shadow": {"type": "boolean"},
+       "diffuse": {"type": "boolean"},
+       "glossy": {"type": "boolean"},
+       "holdout": {"type": "boolean"},
+       "shadow_catcher": {"type": "boolean"},
+       "hide_render_animated": {"type": "boolean"}
+      },
+      "additionalProperties": false
+     },
+     "lightgroup": {"type": "string"},
+     "pass_index": {"type": "integer"},
+     "instance_id": {"type": "integer", "minimum": 0, "maximum": 4294967295},
+     "instance_block": {"type": "integer", "minimum": 0},
+     "instancer_ids": {"enum": ["per_instance", "inherit"]},
+     "semantic": {"type": "string"},
+     "is_editable": {"type": "boolean"},
+     "deform": {
+      "type": "object",
+      "properties": {
+       "is_deform_modified": {"type": "boolean"},
+       "modifiers": {"type": "array", "items": {"type": "object"}, "$comment": "{name, type, show_render}; a PARTICLE_SYSTEM adds its settings' particle_type and render_type (PATH renders strands: GEO-CURVES); a modifier that reads other objects adds objects, their name_full sorted (its object pointers, a collection pointer's objects, the object pointers in its collection properties)"},
+       "shape_keys_animated": {"type": "boolean"},
+       "has_geometry_nodes": {"type": "boolean"},
+       "is_viewport_node": {"type": "boolean"}
+      },
+      "additionalProperties": false
+     },
+     "rigid_body": {
+      "anyOf": [
+       {"type": "null"},
+       {
+        "type": "object",
+        "properties": {
+         "type": {"type": "string"},
+         "enabled": {"type": "boolean"},
+         "kinematic": {"type": "boolean"},
+         "kinematic_animated": {"type": "boolean"},
+         "collision_shape": {"type": "string"},
+         "collision_margin": {"type": "number"},
+         "linear_damping": {"type": "number"},
+         "angular_damping": {"type": "number"}
+        },
+        "additionalProperties": false
+       }
+      ]
+     },
+     "field": {
+      "anyOf": [
+       {"type": "null"},
+       {
+        "type": "object",
+        "properties": {"type": {"type": "string"}, "strength": {"type": "number"}},
+        "additionalProperties": false
+       }
+      ]
+     },
+     "constraints": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "type": {"type": "string"},
+        "target": {"type": ["string", "null"]},
+        "subtarget": {"type": "string"},
+        "mute": {"type": "boolean"},
+        "influence": {"type": "number"},
+        "cache_file": {"type": ["string", "integer", "null"]}
+       },
+       "additionalProperties": false
+      }
+     },
+     "animation": {"type": ["integer", "null"], "minimum": 0},
+     "data_animation": {"type": ["integer", "null"], "minimum": 0},
+     "collections": {"type": "array", "items": {"type": "string"}},
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["key", "name_full", "kind", "matrix_world"],
+    "additionalProperties": false
+   }
+  },
+  "cache_files": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "name": {"type": "string"},
+     "filepath": {"type": "string"},
+     "frame": {"type": "number"},
+     "frame_offset": {"type": "number"},
+     "override_frame": {"type": "boolean"},
+     "is_sequence": {"type": "boolean"}
+    },
+    "additionalProperties": false
+   }
+  },
+  "animations": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "owner": {"type": ["string", "integer", "null"]},
+     "action": {"type": ["string", "null"]},
+     "slot": {"type": ["string", "null"]},
+     "fcurves": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "key": {"type": "string"},
+        "data_path": {"type": "string"},
+        "index": {"type": "integer"},
+        "extrapolation": {"enum": [0, 1]},
+        "keyframes": {"type": "string"},
+        "group": {"type": ["string", "null"]},
+        "modifiers": {"type": "array", "items": {"type": "object"}}
+       },
+       "additionalProperties": false
+      }
+     },
+     "nla": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "track": {"type": "string"},
+        "mute": {"type": "boolean"},
+        "is_solo": {"type": "boolean"},
+        "strips": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "action": {"type": ["string", "null"]},
+           "slot": {"type": ["string", "null"]},
+           "frame_start": {"type": "number"},
+           "frame_end": {"type": "number"},
+           "action_frame_start": {"type": "number"},
+           "action_frame_end": {"type": "number"},
+           "scale": {"type": "number"},
+           "repeat": {"type": "number"},
+           "use_reverse": {"type": "boolean"},
+           "extrapolation": {"enum": [0, 1, 2]},
+           "blend_type": {"type": "string"},
+           "blend_in": {"type": "number"},
+           "blend_out": {"type": "number"},
+           "use_auto_blend": {"type": "boolean"},
+           "influence": {"type": "number"},
+           "use_animated_influence": {"type": "boolean"},
+           "use_animated_time": {"type": "boolean"},
+           "mute": {"type": "boolean"}
+          },
+          "additionalProperties": false
+         }
+        }
+       },
+       "additionalProperties": false
+      }
+     },
+     "drivers": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "properties": {
+        "data_path": {"type": "string"},
+        "index": {"type": "integer"},
+        "type": {"type": "string"},
+        "expression": {"type": "string"},
+        "is_simple_expression": {"type": "boolean"},
+        "is_valid": {"type": "boolean"}
+       },
+       "additionalProperties": false
+      }
+     }
+    },
+    "additionalProperties": false
+   }
+  },
+  "lights": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "object": {"type": "integer", "minimum": 0},
+     "type": {"type": "string"},
+     "props": {
+      "type": "object",
+      "properties": {
+       "energy": {"type": "number"},
+       "color": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3},
+       "shadow_soft_size": {"type": "number"},
+       "use_soft_falloff": {"type": "boolean"},
+       "spot_size": {"type": "number"},
+       "spot_blend": {"type": "number"},
+       "angle": {"type": "number"},
+       "shape": {"type": "string"},
+       "size": {"type": "number"},
+       "size_y": {"type": "number"},
+       "spread": {"type": "number"},
+       "use_shadow": {"type": "boolean"},
+       "exposure": {"type": "number"},
+       "normalize": {"type": "boolean"},
+       "use_temperature": {"type": "boolean"},
+       "temperature_color": {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3}
+      },
+      "additionalProperties": false
+     },
+     "node_graph": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/graph"}]},
+     "light_linking": {
+      "anyOf": [
+       {"type": "null"},
+       {
+        "type": "object",
+        "properties": {"receiver_collection": {"type": ["string", "null"]}, "blocker_collection": {"type": ["string", "null"]}},
+        "additionalProperties": false
+       }
+      ]
+     },
+     "animation": {"type": ["integer", "null"], "minimum": 0},
+     "node_graph_animation": {"type": ["integer", "null"], "minimum": 0},
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["object"],
+    "additionalProperties": false
+   }
+  },
+  "world": {
+   "anyOf": [
+    {"type": "null"},
+    {
+     "type": "object",
+     "properties": {
+      "graph": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/graph"}]},
+      "color": {"anyOf": [{"type": "null"}, {"type": "array", "items": {"type": "number"}, "minItems": 3, "maxItems": 3}]},
+      "lightgroup": {"type": "string"},
+      "cycles_visibility": {
+       "type": "object",
+       "properties": {
+        "camera": {"type": "boolean"},
+        "diffuse": {"type": "boolean"},
+        "glossy": {"type": "boolean"},
+        "transmission": {"type": "boolean"},
+        "scatter": {"type": "boolean"}
+       },
+       "additionalProperties": false
+      },
+      "animation": {"type": ["integer", "null"], "minimum": 0},
+      "graph_animation": {"type": ["integer", "null"], "minimum": 0},
+      "asset": {"$ref": "#/$defs/asset"}
+     },
+     "additionalProperties": false
+    }
+   ]
+  },
+  "cameras": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {
+     "object": {"type": "integer", "minimum": 0},
+     "c1_name": {"type": ["string", "null"]},
+     "props": {
+      "type": "object",
+      "properties": {
+       "type": {"type": "string"},
+       "lens": {"type": "number"},
+       "sensor_width": {"type": "number"},
+       "sensor_height": {"type": "number"},
+       "sensor_fit": {"type": "string"},
+       "shift_x": {"type": "number"},
+       "shift_y": {"type": "number"},
+       "clip_start": {"type": "number"},
+       "clip_end": {"type": "number"},
+       "panorama_type": {"type": "string"},
+       "fisheye_fov": {"type": "number"},
+       "fisheye_lens": {"type": "number"},
+       "fisheye_polynomial_k0": {"type": "number"},
+       "fisheye_polynomial_k1": {"type": "number"},
+       "fisheye_polynomial_k2": {"type": "number"},
+       "fisheye_polynomial_k3": {"type": "number"},
+       "fisheye_polynomial_k4": {"type": "number"},
+       "dof": {
+        "type": "object",
+        "properties": {"use_dof": {"type": "boolean"}, "aperture_fstop": {"type": "number"}},
+        "additionalProperties": false
+       }
+      },
+      "additionalProperties": false
+     },
+     "calibration": {
+      "anyOf": [
+       {"type": "null"},
+       {
+        "type": "object",
+        "properties": {
+         "source": {"type": "string"},
+         "preset": {"type": ["string", "null"]},
+         "file_text": {"type": ["string", "null"]},
+         "camera": {"type": ["string", "integer", "null"]}
+        },
+        "additionalProperties": false
+       }
+      ]
+     },
+     "sensor_family": {"type": ["string", "null"]},
+     "simulate": {"type": "boolean"},
+     "animation": {"type": ["integer", "null"], "minimum": 0},
+     "asset": {"$ref": "#/$defs/asset"}
+    },
+    "required": ["object"],
+    "additionalProperties": false
+   }
+  },
+  "light_groups": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {"name": {"type": "string"}, "waveform": {"type": "object"}},
+    "required": ["name"],
+    "additionalProperties": false
+   }
+  },
+  "semantic_classes": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0, "maximum": 65534}},
+  "collection_semantics": {"type": "object", "additionalProperties": {"type": "string"}},
+  "addon_report": {
+   "type": "array",
+   "items": {
+    "type": "object",
+    "properties": {"code": {"type": "string"}, "object": {"type": "string"}, "message": {"type": "string"}},
+    "required": ["code"],
+    "additionalProperties": false
+   }
+  },
+  "extras": {"type": "object"}
+ },
+ "$defs": {
+  "asset": {
+   "type": "object",
+   "properties": {
+    "license": {"type": ["string", "null"]},
+    "copyright": {"type": ["string", "null"]},
+    "author": {"type": ["string", "null"]}
+   },
+   "additionalProperties": false
+  },
+  "socket": {
+   "type": "object",
+   "properties": {
+    "identifier": {"type": "string", "minLength": 1},
+    "name": {"type": "string"},
+    "type": {"type": "string"},
+    "enabled": {"type": "boolean"},
+    "value": {
+     "anyOf": [{"type": ["null", "boolean", "number", "string"]}, {"type": "array", "items": {"type": ["boolean", "number"]}}]
+    },
+    "default": {
+     "anyOf": [{"type": ["null", "boolean", "number", "string"]}, {"type": "array", "items": {"type": ["boolean", "number"]}}]
+    },
+    "linked": {"type": "boolean"}
+   },
+   "required": ["identifier"],
+   "additionalProperties": false
+  },
+  "output": {
+   "type": "object",
+   "properties": {
+    "identifier": {"type": "string", "minLength": 1},
+    "name": {"type": "string"},
+    "type": {"type": "string"},
+    "enabled": {"type": "boolean"}
+   },
+   "required": ["identifier"],
+   "additionalProperties": false
+  },
+  "node": {
+   "type": "object",
+   "properties": {
+    "name": {"type": "string"},
+    "type": {"type": "string"},
+    "data_type": {"type": "string"},
+    "blend_type": {"type": "string"},
+    "props": {"type": "object"},
+    "inputs": {"type": "array", "items": {"$ref": "#/$defs/socket"}},
+    "outputs": {"type": "array", "items": {"$ref": "#/$defs/output"}}
+   },
+   "required": ["name", "type"],
+   "additionalProperties": false
+  },
+  "graph": {
+   "type": "object",
+   "properties": {
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "links": {"type": "array", "items": {"type": "array", "items": {"type": "string"}, "minItems": 4, "maxItems": 4}}
+   },
+   "required": ["nodes", "links"],
+   "additionalProperties": false
+  }
+ }
+}

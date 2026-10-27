@@ -1,0 +1,104 @@
+/* The approved outline: branding above the menu, quiet colors, an empty page.
+   Furo owns navigation, search, and responsive layout; theme.js restricts themes
+   to the two explicit light and dark states. */
+.ballasim-brand {
+  align-items: flex-start;
+  padding-top: 1.75rem;
+  padding-bottom: 1.25rem;
+}
+
+.ballasim-brand .sidebar-logo-container {
+  width: 100%;
+  margin: 0 0 0.75rem;
+}
+
+.ballasim-brand .sidebar-logo {
+  width: 174px;
+  height: auto;
+  max-width: 100%;
+  margin: 0;
+}
+
+.ballasim-brand .sidebar-brand-text {
+  margin: 0;
+  font-size: 1.5625rem;
+  font-weight: 650;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.ballasim-brand-meta {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+  color: var(--color-foreground-secondary);
+  font-size: 0.875rem;
+}
+
+.ballasim-version {
+  font-size: 0.6875rem;
+}
+
+.sidebar-search-container {
+  margin-top: 0;
+}
+
+.sidebar-tree {
+  font-size: 0.8125rem;
+}
+
+.sidebar-tree .caption {
+  margin-top: 1.25rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.055em;
+}
+
+.sidebar-tree .reference {
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
+.sidebar-tree .toctree-l1 > .reference {
+  color: var(--color-foreground-primary);
+}
+
+.sidebar-tree .current-page > .reference {
+  color: var(--color-brand-primary);
+  box-shadow: inset 2px 0 var(--color-brand-primary);
+  font-weight: 500;
+}
+
+.content {
+  padding-top: 1.75rem;
+}
+
+article[role="main"] {
+  min-height: 28rem;
+}
+
+article[role="main"] h1 {
+  margin-top: 0;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-background-border);
+  font-size: 2.125rem;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.related-pages {
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-background-border);
+}
+
+@media (max-width: 46em) {
+  article[role="main"] {
+    min-height: 20rem;
+  }
+
+  article[role="main"] h1 {
+    font-size: 1.875rem;
+  }
+}

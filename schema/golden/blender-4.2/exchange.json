@@ -1,0 +1,2113 @@
+{
+ "format": "ballasim.blender_exchange",
+ "version": [
+  1,
+  0
+ ],
+ "producer": {
+  "addon": "0.1.0",
+  "blender": "4.2.1 LTS",
+  "blend_file": null,
+  "blend_sha256": null,
+  "exported": "2026-10-13T07:40:12-04:00"
+ },
+ "units": {
+  "system": "METRIC",
+  "scale_length": 1.0
+ },
+ "color": {
+  "scene_linear": null,
+  "display_device": "sRGB",
+  "view_transform": "AgX"
+ },
+ "time": {
+  "fps": 24,
+  "fps_base_bits": "0x3f800000",
+  "frame_start": 1,
+  "frame_end": 11,
+  "frame_map_old": 100,
+  "frame_map_new": 100
+ },
+ "render": {
+  "resolution_x": 1920,
+  "resolution_y": 1080,
+  "resolution_percentage": 100,
+  "pixel_aspect_x": 1.0,
+  "pixel_aspect_y": 1.0,
+  "use_border": false,
+  "use_simplify": true,
+  "rolling_shutter_type": "NONE",
+  "rolling_shutter_duration": 0.10000000149011612,
+  "use_motion_blur": false,
+  "motion_blur_shutter": 0.5,
+  "motion_blur_position": "CENTER",
+  "view_transform": "AgX",
+  "look": "None",
+  "exposure": 0.0,
+  "gamma": 1.0,
+  "film_exposure": 1.0,
+  "max_bounces": 12,
+  "use_denoising": true,
+  "pixel_filter_type": "BLACKMAN_HARRIS",
+  "filter_width": 1.5
+ },
+ "gravity": [
+  0.0,
+  0.0,
+  -9.8100004196167
+ ],
+ "use_gravity": true,
+ "rigidbody_world": null,
+ "span": {
+  "frame_start": 1,
+  "frame_end": 11
+ },
+ "meshes": [
+  {
+   "id": "4fb149bce9cf71d7",
+   "sha256": "4fb149bce9cf71d705839f3a94142de6c26da6c74d3c39cc398f9ef4caae095c",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 24,
+    "C": 96,
+    "T": 44
+   },
+   "uv_maps": [],
+   "active_render_uv": null,
+   "arrays": {
+    "co": "mesh.4fb149bce9cf71d7.co",
+    "corner_vert": "mesh.4fb149bce9cf71d7.corner_vert",
+    "tri_corners": "mesh.4fb149bce9cf71d7.tri_corners",
+    "tri_mat": "mesh.4fb149bce9cf71d7.tri_mat",
+    "corner_normal": "mesh.4fb149bce9cf71d7.corner_normal"
+   }
+  },
+  {
+   "id": "3ab29a9b71d5993b",
+   "sha256": "3ab29a9b71d5993b63ae01ed1a19e2ad150fa9a8f5f337fed5f6067392f22fc8",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 3,
+    "C": 3,
+    "T": 1
+   },
+   "uv_maps": [],
+   "active_render_uv": null,
+   "arrays": {
+    "co": "mesh.3ab29a9b71d5993b.co",
+    "corner_vert": "mesh.3ab29a9b71d5993b.corner_vert",
+    "tri_corners": "mesh.3ab29a9b71d5993b.tri_corners",
+    "tri_mat": "mesh.3ab29a9b71d5993b.tri_mat",
+    "corner_normal": "mesh.3ab29a9b71d5993b.corner_normal"
+   }
+  },
+  {
+   "id": "1aff048423e9eeda",
+   "sha256": "1aff048423e9eeda4741f4cb9391f90cc5528bd9131c7f27fbe7ee85acc4994e",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 8,
+    "C": 24,
+    "T": 12
+   },
+   "uv_maps": [
+    "UVMap"
+   ],
+   "active_render_uv": "UVMap",
+   "arrays": {
+    "co": "mesh.1aff048423e9eeda.co",
+    "corner_vert": "mesh.1aff048423e9eeda.corner_vert",
+    "tri_corners": "mesh.1aff048423e9eeda.tri_corners",
+    "tri_mat": "mesh.1aff048423e9eeda.tri_mat",
+    "corner_normal": "mesh.1aff048423e9eeda.corner_normal",
+    "uv": {
+     "UVMap": "mesh.1aff048423e9eeda.uv.0"
+    }
+   }
+  },
+  {
+   "id": "b810d54318714982",
+   "sha256": "b810d543187149827367b054025a2488b06f84b59971ef87b8fc139648d591dd",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 8,
+    "C": 24,
+    "T": 12
+   },
+   "uv_maps": [],
+   "active_render_uv": null,
+   "arrays": {
+    "co": "mesh.b810d54318714982.co",
+    "corner_vert": "mesh.b810d54318714982.corner_vert",
+    "tri_corners": "mesh.b810d54318714982.tri_corners",
+    "tri_mat": "mesh.b810d54318714982.tri_mat",
+    "corner_normal": "mesh.b810d54318714982.corner_normal"
+   }
+  },
+  {
+   "id": "b2b2fda8abd179b7",
+   "sha256": "b2b2fda8abd179b7def95658066ebb49dffddad0ed9d409a860a713654fbeeb5",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 98,
+    "C": 384,
+    "T": 192
+   },
+   "uv_maps": [],
+   "active_render_uv": null,
+   "arrays": {
+    "co": "mesh.b2b2fda8abd179b7.co",
+    "corner_vert": "mesh.b2b2fda8abd179b7.corner_vert",
+    "tri_corners": "mesh.b2b2fda8abd179b7.tri_corners",
+    "tri_mat": "mesh.b2b2fda8abd179b7.tri_mat",
+    "corner_normal": "mesh.b2b2fda8abd179b7.corner_normal"
+   }
+  },
+  {
+   "id": "1d193b37a415c25a",
+   "sha256": "1d193b37a415c25ac81a2eb8f7ce85d95e8b2a332f1ec56b42b16847b81ae80f",
+   "normals_domain": "POINT",
+   "counts": {
+    "V": 150,
+    "C": 576,
+    "T": 288
+   },
+   "uv_maps": [
+    "UVMap"
+   ],
+   "active_render_uv": "UVMap",
+   "arrays": {
+    "co": "mesh.1d193b37a415c25a.co",
+    "corner_vert": "mesh.1d193b37a415c25a.corner_vert",
+    "tri_corners": "mesh.1d193b37a415c25a.tri_corners",
+    "tri_mat": "mesh.1d193b37a415c25a.tri_mat",
+    "vert_normal": "mesh.1d193b37a415c25a.vert_normal",
+    "uv": {
+     "UVMap": "mesh.1d193b37a415c25a.uv.0"
+    }
+   }
+  },
+  {
+   "id": "e57f158929863590",
+   "sha256": "e57f15892986359078fb48832687945c096341111845fc47f8d4359c9fc5f067",
+   "normals_domain": "FACE",
+   "counts": {
+    "V": 8,
+    "C": 24,
+    "T": 12
+   },
+   "uv_maps": [],
+   "active_render_uv": null,
+   "arrays": {
+    "co": "mesh.e57f158929863590.co",
+    "corner_vert": "mesh.e57f158929863590.corner_vert",
+    "tri_corners": "mesh.e57f158929863590.tri_corners",
+    "tri_mat": "mesh.e57f158929863590.tri_mat",
+    "corner_normal": "mesh.e57f158929863590.corner_normal"
+   }
+  }
+ ],
+ "images": [
+  {
+   "id": "checker",
+   "file": "textures/b3b235be641a777a6d4cf24c3eaf7c8b32953011c9d2e583880dcf1b9fc8656e.npy",
+   "kind": "byte",
+   "colorspace": "sRGB",
+   "alpha_mode": "STRAIGHT",
+   "width": 4,
+   "height": 4,
+   "channels": 4,
+   "extension": "REPEAT",
+   "interpolation": "Linear",
+   "source_path": null
+  }
+ ],
+ "materials": [
+  {
+   "id": "Checker",
+   "name": "Checker",
+   "emission_sampling": "AUTO",
+   "graph": {
+    "nodes": [
+     {
+      "name": "Principled BSDF",
+      "type": "ShaderNodeBsdfPrincipled",
+      "data_type": "",
+      "blend_type": "",
+      "props": {
+       "mute": false,
+       "distribution": "MULTI_GGX",
+       "subsurface_method": "RANDOM_WALK"
+      },
+      "inputs": [
+       {
+        "identifier": "Base Color",
+        "name": "Base Color",
+        "type": "RGBA",
+        "enabled": true,
+        "value": [
+         0.800000011920929,
+         0.800000011920929,
+         0.800000011920929,
+         1.0
+        ],
+        "default": [
+         0.800000011920929,
+         0.800000011920929,
+         0.800000011920929,
+         1.0
+        ],
+        "linked": true
+       },
+       {
+        "identifier": "Metallic",
+        "name": "Metallic",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Roughness",
+        "name": "Roughness",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.5,
+        "default": 0.5,
+        "linked": false
+       },
+       {
+        "identifier": "IOR",
+        "name": "IOR",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 1.5,
+        "default": 1.5,
+        "linked": false
+       },
+       {
+        "identifier": "Alpha",
+        "name": "Alpha",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 1.0,
+        "default": 1.0,
+        "linked": false
+       },
+       {
+        "identifier": "Normal",
+        "name": "Normal",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "default": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Weight",
+        "name": "Weight",
+        "type": "VALUE",
+        "enabled": false,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Subsurface Weight",
+        "name": "Subsurface Weight",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Subsurface Radius",
+        "name": "Subsurface Radius",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         1.0,
+         0.20000000298023224,
+         0.10000000149011612
+        ],
+        "default": [
+         1.0,
+         0.20000000298023224,
+         0.10000000149011612
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Subsurface Scale",
+        "name": "Subsurface Scale",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.05000000074505806,
+        "default": 0.05000000074505806,
+        "linked": false
+       },
+       {
+        "identifier": "Subsurface IOR",
+        "name": "Subsurface IOR",
+        "type": "VALUE",
+        "enabled": false,
+        "value": 1.399999976158142,
+        "default": 1.399999976158142,
+        "linked": false
+       },
+       {
+        "identifier": "Subsurface Anisotropy",
+        "name": "Subsurface Anisotropy",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Specular IOR Level",
+        "name": "Specular IOR Level",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.5,
+        "linked": false
+       },
+       {
+        "identifier": "Specular Tint",
+        "name": "Specular Tint",
+        "type": "RGBA",
+        "enabled": true,
+        "value": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "default": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Anisotropic",
+        "name": "Anisotropic",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Anisotropic Rotation",
+        "name": "Anisotropic Rotation",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Tangent",
+        "name": "Tangent",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "default": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Transmission Weight",
+        "name": "Transmission Weight",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Coat Weight",
+        "name": "Coat Weight",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Coat Roughness",
+        "name": "Coat Roughness",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.029999999329447746,
+        "default": 0.029999999329447746,
+        "linked": false
+       },
+       {
+        "identifier": "Coat IOR",
+        "name": "Coat IOR",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 1.5,
+        "default": 1.5,
+        "linked": false
+       },
+       {
+        "identifier": "Coat Tint",
+        "name": "Coat Tint",
+        "type": "RGBA",
+        "enabled": true,
+        "value": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "default": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Coat Normal",
+        "name": "Coat Normal",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "default": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Sheen Weight",
+        "name": "Sheen Weight",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Sheen Roughness",
+        "name": "Sheen Roughness",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.5,
+        "default": 0.5,
+        "linked": false
+       },
+       {
+        "identifier": "Sheen Tint",
+        "name": "Sheen Tint",
+        "type": "RGBA",
+        "enabled": true,
+        "value": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "default": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Emission Color",
+        "name": "Emission Color",
+        "type": "RGBA",
+        "enabled": true,
+        "value": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "default": [
+         1.0,
+         1.0,
+         1.0,
+         1.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Emission Strength",
+        "name": "Emission Strength",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Thin Film Thickness",
+        "name": "Thin Film Thickness",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       },
+       {
+        "identifier": "Thin Film IOR",
+        "name": "Thin Film IOR",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 1.3300000429153442,
+        "default": 1.3300000429153442,
+        "linked": false
+       }
+      ],
+      "outputs": [
+       {
+        "identifier": "BSDF",
+        "name": "BSDF",
+        "type": "SHADER",
+        "enabled": true
+       }
+      ]
+     },
+     {
+      "name": "Material Output",
+      "type": "ShaderNodeOutputMaterial",
+      "data_type": "",
+      "blend_type": "",
+      "props": {
+       "mute": false,
+       "is_active_output": true,
+       "target": "ALL"
+      },
+      "inputs": [
+       {
+        "identifier": "Surface",
+        "name": "Surface",
+        "type": "SHADER",
+        "enabled": true,
+        "value": null,
+        "default": null,
+        "linked": true
+       },
+       {
+        "identifier": "Volume",
+        "name": "Volume",
+        "type": "SHADER",
+        "enabled": true,
+        "value": null,
+        "default": null,
+        "linked": false
+       },
+       {
+        "identifier": "Displacement",
+        "name": "Displacement",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "default": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "linked": false
+       },
+       {
+        "identifier": "Thickness",
+        "name": "Thickness",
+        "type": "VALUE",
+        "enabled": true,
+        "value": 0.0,
+        "default": 0.0,
+        "linked": false
+       }
+      ],
+      "outputs": []
+     },
+     {
+      "name": "Image Texture",
+      "type": "ShaderNodeTexImage",
+      "data_type": "",
+      "blend_type": "",
+      "props": {
+       "mute": false,
+       "image": 0,
+       "projection": "FLAT",
+       "interpolation": "Linear",
+       "projection_blend": 0.0,
+       "extension": "REPEAT"
+      },
+      "inputs": [
+       {
+        "identifier": "Vector",
+        "name": "Vector",
+        "type": "VECTOR",
+        "enabled": true,
+        "value": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "default": [
+         0.0,
+         0.0,
+         0.0
+        ],
+        "linked": false
+       }
+      ],
+      "outputs": [
+       {
+        "identifier": "Color",
+        "name": "Color",
+        "type": "RGBA",
+        "enabled": true
+       },
+       {
+        "identifier": "Alpha",
+        "name": "Alpha",
+        "type": "VALUE",
+        "enabled": true
+       }
+      ]
+     }
+    ],
+    "links": [
+     [
+      "Principled BSDF",
+      "BSDF",
+      "Material Output",
+      "Surface"
+     ],
+     [
+      "Image Texture",
+      "Color",
+      "Principled BSDF",
+      "Base Color"
+     ]
+    ]
+   }
+  }
+ ],
+ "objects": [
+  {
+   "key": [
+    "Bevel"
+   ],
+   "name_full": "Bevel",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 0,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 1,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [
+     {
+      "name": "bev",
+      "type": "BEVEL",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Camera"
+   ],
+   "name_full": "Camera",
+   "library": null,
+   "kind": "object",
+   "type": "CAMERA",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": null,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.17364822328090668,
+    -0.9848077297210693,
+    -8.0,
+    0.0,
+    0.9848077297210693,
+    0.17364822328090668,
+    2.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "EyeHidden"
+   ],
+   "name_full": "EyeHidden",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 1,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 2,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Lamp"
+   ],
+   "name_full": "Lamp",
+   "library": null,
+   "kind": "object",
+   "type": "LIGHT",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": null,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    4.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": false,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": true,
+    "hide_render_animated": false
+   },
+   "lightgroup": "key",
+   "pass_index": 0,
+   "instance_id": 3,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "MonitorHidden"
+   ],
+   "name_full": "MonitorHidden",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 2,
+   "material_slots": [
+    0
+   ],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    -3.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 4,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": 0,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Prop"
+   ],
+   "name_full": "Prop",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 3,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    3.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 5,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": 1,
+   "data_animation": null,
+   "collections": [
+    "Props"
+   ]
+  },
+  {
+   "key": [
+    "Ring"
+   ],
+   "name_full": "Ring",
+   "library": null,
+   "kind": "object",
+   "type": "CURVE",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": null,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 6,
+   "instance_block": 1,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Scatter"
+   ],
+   "name_full": "Scatter",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": null,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    6.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 7,
+   "instance_block": 4,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": true,
+    "modifiers": [
+     {
+      "name": "GN",
+      "type": "NODES",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": true,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Subsurf"
+   ],
+   "name_full": "Subsurf",
+   "library": null,
+   "kind": "object",
+   "type": "MESH",
+   "instancer": null,
+   "persistent_id": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "instance_object": null,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 4,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 11,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "box",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [
+     {
+      "name": "ss",
+      "type": "SUBSURF",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Ring",
+    "Ring",
+    0,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "name_full": "Ring",
+   "library": null,
+   "kind": "instance",
+   "type": "MESH",
+   "instancer": 6,
+   "persistent_id": [
+    0,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "instance_object": 6,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 5,
+   "material_slots": [],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    6.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": false,
+    "modifiers": [],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": false,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Scatter",
+    "Scatter",
+    0,
+    0,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "name_full": "Scatter",
+   "library": null,
+   "kind": "instance",
+   "type": "MESH",
+   "instancer": 7,
+   "persistent_id": [
+    0,
+    0,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "instance_object": 7,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 6,
+   "material_slots": [
+    null
+   ],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    6.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": true,
+    "modifiers": [
+     {
+      "name": "GN",
+      "type": "NODES",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": true,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Scatter",
+    "Scatter",
+    0,
+    1,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "name_full": "Scatter",
+   "library": null,
+   "kind": "instance",
+   "type": "MESH",
+   "instancer": 7,
+   "persistent_id": [
+    0,
+    1,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "instance_object": 7,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 6,
+   "material_slots": [
+    null
+   ],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    6.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": true,
+    "modifiers": [
+     {
+      "name": "GN",
+      "type": "NODES",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": true,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Scatter",
+    "Scatter",
+    0,
+    2,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "name_full": "Scatter",
+   "library": null,
+   "kind": "instance",
+   "type": "MESH",
+   "instancer": 7,
+   "persistent_id": [
+    0,
+    2,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "instance_object": 7,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 6,
+   "material_slots": [
+    null
+   ],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    2.0,
+    0.0,
+    1.0,
+    0.0,
+    6.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": true,
+    "modifiers": [
+     {
+      "name": "GN",
+      "type": "NODES",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": true,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  },
+  {
+   "key": [
+    "Scatter",
+    "Scatter",
+    0,
+    3,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "name_full": "Scatter",
+   "library": null,
+   "kind": "instance",
+   "type": "MESH",
+   "instancer": 7,
+   "persistent_id": [
+    0,
+    3,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647,
+    2147483647
+   ],
+   "instance_object": 7,
+   "parent": null,
+   "parent_type": "OBJECT",
+   "parent_bone": "",
+   "mesh": 6,
+   "material_slots": [
+    null
+   ],
+   "matrix_world": [
+    1.0,
+    0.0,
+    0.0,
+    3.0,
+    0.0,
+    1.0,
+    0.0,
+    6.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
+   "visibility": {
+    "render": true,
+    "camera": true,
+    "shadow": true,
+    "diffuse": true,
+    "glossy": true,
+    "holdout": false,
+    "shadow_catcher": false,
+    "hide_render_animated": false
+   },
+   "lightgroup": "",
+   "pass_index": 0,
+   "instance_id": 0,
+   "instance_block": 0,
+   "instancer_ids": "per_instance",
+   "semantic": "",
+   "is_editable": true,
+   "deform": {
+    "is_deform_modified": true,
+    "modifiers": [
+     {
+      "name": "GN",
+      "type": "NODES",
+      "show_render": true
+     }
+    ],
+    "shape_keys_animated": false,
+    "has_geometry_nodes": true,
+    "is_viewport_node": false
+   },
+   "rigid_body": null,
+   "field": null,
+   "constraints": [],
+   "animation": null,
+   "data_animation": null,
+   "collections": []
+  }
+ ],
+ "cache_files": [],
+ "animations": [
+  {
+   "owner": "OBJECT:MonitorHidden",
+   "action": "MonitorHiddenAction",
+   "slot": null,
+   "fcurves": [
+    {
+     "key": "0_0",
+     "data_path": "location",
+     "index": 0,
+     "extrapolation": 0,
+     "keyframes": "anim.0_0.keys",
+     "group": null,
+     "modifiers": []
+    },
+    {
+     "key": "0_1",
+     "data_path": "location",
+     "index": 1,
+     "extrapolation": 0,
+     "keyframes": "anim.0_1.keys",
+     "group": null,
+     "modifiers": []
+    },
+    {
+     "key": "0_2",
+     "data_path": "location",
+     "index": 2,
+     "extrapolation": 0,
+     "keyframes": "anim.0_2.keys",
+     "group": null,
+     "modifiers": []
+    }
+   ],
+   "nla": [],
+   "drivers": []
+  },
+  {
+   "owner": "OBJECT:Prop",
+   "action": "PropAction",
+   "slot": null,
+   "fcurves": [
+    {
+     "key": "1_0",
+     "data_path": "location",
+     "index": 0,
+     "extrapolation": 0,
+     "keyframes": "anim.1_0.keys",
+     "group": null,
+     "modifiers": []
+    }
+   ],
+   "nla": [],
+   "drivers": []
+  }
+ ],
+ "lights": [
+  {
+   "object": 3,
+   "type": "POINT",
+   "props": {
+    "energy": 100.0,
+    "color": [
+     1.0,
+     1.0,
+     1.0
+    ],
+    "shadow_soft_size": 0.0,
+    "use_soft_falloff": true,
+    "use_shadow": true
+   },
+   "node_graph": null,
+   "light_linking": {
+    "receiver_collection": null,
+    "blocker_collection": null
+   },
+   "animation": null,
+   "node_graph_animation": null
+  }
+ ],
+ "world": {
+  "graph": {
+   "nodes": [
+    {
+     "name": "Background",
+     "type": "ShaderNodeBackground",
+     "data_type": "",
+     "blend_type": "",
+     "props": {
+      "mute": false
+     },
+     "inputs": [
+      {
+       "identifier": "Color",
+       "name": "Color",
+       "type": "RGBA",
+       "enabled": true,
+       "value": [
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806,
+        1.0
+       ],
+       "default": [
+        0.800000011920929,
+        0.800000011920929,
+        0.800000011920929,
+        1.0
+       ],
+       "linked": false
+      },
+      {
+       "identifier": "Strength",
+       "name": "Strength",
+       "type": "VALUE",
+       "enabled": true,
+       "value": 0.20000000298023224,
+       "default": 1.0,
+       "linked": false
+      },
+      {
+       "identifier": "Weight",
+       "name": "Weight",
+       "type": "VALUE",
+       "enabled": false,
+       "value": 0.0,
+       "default": 0.0,
+       "linked": false
+      }
+     ],
+     "outputs": [
+      {
+       "identifier": "Background",
+       "name": "Background",
+       "type": "SHADER",
+       "enabled": true
+      }
+     ]
+    },
+    {
+     "name": "World Output",
+     "type": "ShaderNodeOutputWorld",
+     "data_type": "",
+     "blend_type": "",
+     "props": {
+      "mute": false,
+      "is_active_output": true,
+      "target": "ALL"
+     },
+     "inputs": [
+      {
+       "identifier": "Surface",
+       "name": "Surface",
+       "type": "SHADER",
+       "enabled": true,
+       "value": null,
+       "default": null,
+       "linked": true
+      },
+      {
+       "identifier": "Volume",
+       "name": "Volume",
+       "type": "SHADER",
+       "enabled": true,
+       "value": null,
+       "default": null,
+       "linked": false
+      }
+     ],
+     "outputs": []
+    }
+   ],
+   "links": [
+    [
+     "Background",
+     "Background",
+     "World Output",
+     "Surface"
+    ]
+   ]
+  },
+  "color": [
+   0.05000000074505806,
+   0.05000000074505806,
+   0.05000000074505806
+  ],
+  "lightgroup": "",
+  "cycles_visibility": {
+   "camera": true,
+   "diffuse": true,
+   "glossy": true,
+   "transmission": true,
+   "scatter": true
+  },
+  "animation": null,
+  "graph_animation": null
+ },
+ "cameras": [
+  {
+   "object": 1,
+   "c1_name": "Camera",
+   "props": {
+    "type": "PERSP",
+    "lens": 50.0,
+    "sensor_width": 36.0,
+    "sensor_height": 24.0,
+    "sensor_fit": "AUTO",
+    "shift_x": 0.0,
+    "shift_y": 0.0,
+    "clip_start": 0.10000000149011612,
+    "clip_end": 1000.0,
+    "panorama_type": "FISHEYE_EQUISOLID",
+    "fisheye_fov": 3.1415927410125732,
+    "fisheye_lens": 10.5,
+    "fisheye_polynomial_k0": -1.1735143743862864e-05,
+    "fisheye_polynomial_k1": -0.019988736137747765,
+    "fisheye_polynomial_k2": -3.3525323033245513e-06,
+    "fisheye_polynomial_k3": 3.0992753181635635e-06,
+    "fisheye_polynomial_k4": -2.60646473293491e-08,
+    "dof": {
+     "use_dof": false,
+     "aperture_fstop": 2.799999952316284
+    }
+   },
+   "calibration": null,
+   "sensor_family": null,
+   "simulate": true,
+   "animation": null
+  }
+ ],
+ "light_groups": [
+  {
+   "name": "key",
+   "waveform": {
+    "type": "constant"
+   }
+  }
+ ],
+ "semantic_classes": {
+  "box": 1,
+  "prop": 2
+ },
+ "collection_semantics": {
+  "Props": "prop"
+ },
+ "addon_report": [],
+ "extras": {}
+}

@@ -1,0 +1,67 @@
+format: ballasim.profile/1
+id: evimo2/prophesee_gen3_right@v0
+mount: camera                       # keys relative to cameras.<camera>
+description: >-
+  EVIMO2 right Prophesee Gen3 as run in P1-M5 (frozen, D6): the values of the left profile. Every sensor and
+  pixel-response key at the value
+  of the P1 runs and the bench references, so later changes of the family priors (D4) cannot move it.
+valid_for: BallaSim P1-M5 model (M3 cascade, Phase-1 renderer)
+values:
+  sensor.family: {value: prophesee_gen3, status: data, source: "EVIMO2 hardware (G6 t10)"}
+  # Photoreceptor cascade.
+  sensor.k: {value: 1.0e16, status: prior, source: "Graça 2023: sigma_1 ~ 0.04 log-e gives k = sigma_1^2 / q (G5 t7)"}
+  sensor.tau_o: {value: 25.0e-6, status: prior, source: "NIST Gen3.1 ON-latency fit, k pinned, tau_o = tau_sf / 4 imposed (M3 V8)"}
+  sensor.tau_sf: {value: 100.0e-6, status: prior, source: "NIST Gen3.1 ON-latency fit, k pinned (M3 V8)"}
+  sensor.sigma_o: {value: 0.06, status: prior, source: "DAVIS346 I_pr-path estimate (Graça 2023, G5 §2.5)"}
+  sensor.noise: {value: true, status: choice, source: "model switch"}
+  # Input and dark current.
+  sensor.dark_current_fA: {value: 0.21, status: prior,
+                           source: "DAVIS346 E_dark 2 mlx x 15 um pitch x white-LED responsivity (R8 t4, S2 OPT-09)"}
+  sensor.dark_sigma_ln: {value: 0.3, status: placeholder, source: "assumption (M3 O8), unsourced"}
+  sensor.dark_ea_eV: {value: 0.78, status: prior, source: "unverified 6-8 K doubling (Nozaki & Delbrück 2017; R2 §2.3)"}
+  sensor.temperature_K: {value: 298.15, status: choice, source: "the reference temperature of the priors"}
+  sensor.reference_temperature_K: {value: 298.15, status: prior, source: "the dark and leak priors are quoted at 25 C"}
+  # Comparator.
+  sensor.theta_on: {value: 0.25, status: prior, source: "Prophesee Gen3 NCT 25 % (R2 §2.4); DESIGN §8.9"}
+  sensor.theta_off: {value: 0.375, status: fitted, source: "P1_RESULTS P1-M5 step 1 (C_off / C_on = 1.5)",
+                     data: "imo/train scene15_dyn_test_00, left, 2-3 s, ON fraction",
+                     known_bias: "fitted on the left camera, applied to the right unvalidated; too-long OFF tails (void, no glare); fitted with ambient 1.0"}
+  sensor.sigma_theta_on: {value: 0.03, status: prior, source: "McReynolds 2024 0.02-0.03; Gallego 2-4 %"}
+  sensor.sigma_theta_off: {value: 0.03, status: prior, source: "McReynolds 2024 0.02-0.03; Gallego 2-4 %"}
+  sensor.theta_onoff_corr: {value: 0.0, status: choice, source: "D11: 0 keeps the independent draws of M3 A.19"}
+  sensor.theta_floor: {value: 0.01, status: choice, source: "v2e clamp (M3 A.19)"}
+  sensor.reset_mode: {value: physical, status: choice, source: "hardware reset at release (R2 t6)"}
+  sensor.refractory_s: {value: 0.24e-3, status: measured, source: "G4 §2.5 (EVIMO2 1st-percentile same-pixel interval)",
+                        known_bias: "contains the photoreceptor lag the model simulates again"}
+  sensor.eps_ci: {value: 0.0, status: prior, source: "R2 §2.1E: ~0 unless T_r < 100 us"}
+  sensor.initial_phase: {value: uniform, status: choice, source: "renewal law of a leak-only reference (M3 A.20)"}
+  # Leak and hot pixels.
+  sensor.leak_rate_hz: {value: 0.005, status: measured, source: "R7 t12 (EVIMO2 mean non-hot static BA, sanity/sliding_00 left)",
+                        known_bias: "total background activity under light, not dark leak; noise double counted"}
+  sensor.leak_sigma_log10: {value: 0.1, status: placeholder, source: "v2e convention (R2 §2.3)"}
+  sensor.leak_ea_eV: {value: 0.78, status: prior, source: "unverified Arrhenius assumption (R2 §2.3)"}
+  sensor.hot_fraction: {value: 4.0e-4, status: measured, source: "R7 §2.5: 131 of 307,200 pixels above 50 Hz, left camera",
+                        known_bias: "measured on the left camera; the right one has 1.4e-3 (R7 §2.5)"}
+  sensor.hot_rate_law: {value: log_uniform, status: placeholder, source: "M3 §A.5 assumption"}
+  sensor.hot_rate_min_hz: {value: 10.0, status: placeholder, source: "unsourced (PARAMETERS §3.1.4)"}
+  sensor.hot_rate_max_hz: {value: 2000.0, status: measured, source: "R2 §2.3: EVIMO2 per-pixel maxima 1.2-2.3 kHz"}
+  sensor.hot_rate_median_hz: {value: 100.0, status: placeholder,
+                              source: "EVIMO2 hot-pixel median ~90-100 Hz (PARAMETERS §3.1.4); inert under log_uniform"}
+  sensor.hot_rate_sigma_ln: {value: 1.5, status: placeholder,
+                             source: "about the ln-spread of log-uniform 10-2000 Hz; inert under log_uniform"}
+  sensor.hot_leak_fraction: {value: 0.5, status: placeholder, source: "M3 §A.5 assumption (50/50 split)"}
+  sensor.hot_reference_current_fA: {value: 100.0, status: placeholder, source: "none (SENSOR.md deviation 10)"}
+  # Readout and clock.
+  sensor.readout_quantum_s: {value: 1.0e-6, status: prior, source: "vendor timestamp formats (Prophesee EVT)"}
+  sensor.readout_delay_s: {value: 300.0e-6, status: prior, source: "NIST Gen3.1 latency fit with k pinned (M3 V8, 306 us)",
+                           known_bias: "double counted under the delta_GT clock offsets (D7: v1 sets the quantum)"}
+  sensor.clock_drift_ppm: {value: 0.0, status: choice, source: "D7a: v0 keeps 0 (see notes)"}
+  # Pixel response (one per run: the cameras of a run must agree).
+  sensor.rgb_weights: {value: [0.52, 0.37, 0.11], status: prior,
+                       source: "R8 t8: Prophesee Gen3.1 QE under a white LED", known_bias: "the EVIMO2 illuminant is unknown"}
+  sensor.aperture_px: {value: 1.0, status: prior, source: "DESIGN §8.1 / S2 OPT-07 (microlenses implied by QE 37 % at 25 % fill factor); G6"}
+  optics.blur_sigma_px: {value: 0.15, status: prior, source: "G6 §2.8: a low-cost 8 mm lens at 15 um",
+                         known_bias: "no MTF data"}
+notes: >-
+  Clock drift: measured (+18.0 ppm right, G1 t6), documented in ballasim.evimo2.clocks.DRIFT_PPM; v0 keeps 0 (D7a).
+  The clock offset comes from the bundle camera (G1 delta), not from this profile.
