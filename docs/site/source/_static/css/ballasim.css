@@ -1,4 +1,4 @@
-/* The approved outline: branding above the menu, quiet colors, an empty page.
+/* Documentation: branding above the menu, quiet colors, readable reference tables.
    Furo owns navigation, search, and responsive layout; theme.js restricts themes
    to the two explicit light and dark states. */
 .ballasim-brand {
@@ -43,6 +43,24 @@
 
 .sidebar-search-container {
   margin-top: 0;
+  --color-sidebar-search-background: #ededed;
+  --color-sidebar-search-background--focus: #e5e5e5;
+  --color-sidebar-search-border: #cccccc;
+  --color-sidebar-search-foreground: #333333;
+  --color-sidebar-search-icon: #666666;
+}
+
+body[data-theme="dark"] .sidebar-search-container {
+  --color-sidebar-search-background: #2b2b2b;
+  --color-sidebar-search-background--focus: #333333;
+  --color-sidebar-search-border: #4a4a4a;
+  --color-sidebar-search-foreground: #e6e6e6;
+  --color-sidebar-search-icon: #b3b3b3;
+}
+
+.sidebar-search::placeholder {
+  color: var(--color-sidebar-search-icon);
+  opacity: 1;
 }
 
 .sidebar-tree {
@@ -91,6 +109,97 @@ article[role="main"] h1 {
 .related-pages {
   padding-top: 1.25rem;
   border-top: 1px solid var(--color-background-border);
+}
+
+article[role="main"] h2 {
+  margin-top: 2rem;
+  font-size: 1.4375rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+article[role="main"] h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+article[role="main"] h3:has(code) {
+  margin-top: 1.75rem;
+  padding-top: 0.875rem;
+  border-top: 1px solid var(--color-background-border);
+}
+
+article[role="main"] h3 code {
+  background: transparent;
+  color: inherit;
+  font-size: 0.95em;
+}
+
+/* Blue text denotes links. Method headings and syntax tokens are not links. */
+body {
+  --ballasim-syntax-name: #6e3ca1;
+  --ballasim-syntax-number: #8b4f13;
+  --ballasim-syntax-value: #3e6d35;
+  --ballasim-syntax-deleted: #9b3434;
+  --color-api-changed: #8b4f13;
+}
+
+body[data-theme="dark"] {
+  --ballasim-syntax-name: #d2b4f0;
+  --ballasim-syntax-number: #e1b47c;
+  --ballasim-syntax-value: #a7cf88;
+  --ballasim-syntax-deleted: #f0a4a4;
+  --color-api-changed: #e1b47c;
+}
+
+body[data-theme] .highlight :is(.nc, .no, .nf, .py, .nt, .nn, .ss, .fm, .gh, .gu) {
+  color: var(--ballasim-syntax-name);
+}
+
+body[data-theme] .highlight :is(.m, .mb, .mf, .mh, .mi, .mo, .il) {
+  color: var(--ballasim-syntax-number);
+}
+
+body[data-theme] .highlight :is(.nb, .bp, .nv, .vc, .vg, .vi, .vm) {
+  color: var(--ballasim-syntax-value);
+}
+
+body[data-theme] .highlight .gd {
+  color: var(--ballasim-syntax-deleted);
+}
+
+body[data-theme] .highlight :is(.nc, .nn) {
+  text-decoration: none;
+}
+
+article[role="main"] a[href] :is(code, .sig-name, .sig-prename) {
+  color: inherit;
+}
+
+table.docutils {
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+table.docutils td {
+  vertical-align: top;
+}
+
+table.docutils td p {
+  line-height: 1.55;
+}
+
+table.docutils td:first-child {
+  min-width: 12rem;
+}
+
+table.docutils td:nth-child(2) {
+  min-width: 7rem;
+}
+
+table.docutils td:first-child code {
+  white-space: normal;
+  overflow-wrap: normal;
 }
 
 @media (max-width: 46em) {

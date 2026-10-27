@@ -6,7 +6,8 @@ on:
     paths:
       - docs/site/**
       - .github/workflows/docs.yml
-      - python/ballasim/__init__.py
+      - python/ballasim/**
+      - src/**
   workflow_dispatch:
 
 permissions:

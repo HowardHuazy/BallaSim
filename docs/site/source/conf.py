@@ -1,4 +1,4 @@
-"""Build the documentation shell without importing or building BallaSim."""
+"""Build the documentation without importing or building BallaSim."""
 
 from pathlib import Path
 import re
@@ -13,8 +13,10 @@ release = re.search(
 version = release
 language = "en"
 
-extensions = ["myst_parser", "sphinx.ext.githubpages"]
+extensions = ["myst_parser", "sphinx.ext.githubpages", "sphinx.ext.mathjax"]
 source_suffix = {".md": "markdown"}
+myst_heading_anchors = 3
+myst_enable_extensions = ["dollarmath"]
 root_doc = "index"
 exclude_patterns = []
 templates_path = ["_templates"]

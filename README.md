@@ -12,7 +12,7 @@
 <p align="center">
   <img alt="Status: work in progress" src="https://img.shields.io/badge/status-work%20in%20progress-orange">
   <a href="LICENSE"><img alt="License: CC BY-NC 4.0" src="https://img.shields.io/badge/license-CC%20BY--NC%204.0-lightgrey"></a>
-  <a href="https://howardhuazy.github.io/BallaSim/"><img alt="Documentation: coming later" src="https://img.shields.io/badge/docs-coming%20later-blue"></a>
+  <a href="https://howardhuazy.github.io/BallaSim/"><img alt="Documentation: simulation manual" src="https://img.shields.io/badge/docs-simulation%20manual-blue"></a>
 </p>
 
 ![Real EVIMO2 events beside BallaSim's simulation of the same two seconds](docs/media/teaser_sfm.webp)
@@ -46,11 +46,11 @@ Frame-based pipelines render images and then convert them into events, so event 
 
 1. **Adaptive per-pixel sampling.** Each pixel chooses its own sample times from an error tolerance: dense where the signal changes, sparse where it does not.
 2. **Exact-time ray tracing.** Each sample is ray-traced against the geometry posed exactly at that instant, from continuous trajectories.
-3. **A continuous-time pixel model.** Events are solved between samples, so their timestamps are not quantised to any clock.
+3. **A continuous-time pixel model.** Threshold crossings are solved between samples; timestamp quantization is applied only when configured by the readout model.
 
 ## Status
 
-BallaSim is under active development, and this repository receives periodic snapshots of it. Interfaces, file formats and parameters may change between snapshots. Documentation is planned for a later stage of the project.
+BallaSim is under active development, and this repository receives periodic snapshots of it. Interfaces, file formats and parameters may change between snapshots. The [simulation manual](https://howardhuazy.github.io/BallaSim/) covers scene preparation, sensor models, configuration, Python methods, and outputs.
 
 Linux x86-64 with the conda environment in `tools/env/`; an NVIDIA GPU is optional:
 
@@ -65,4 +65,4 @@ For the GPU path, point `OPTIX_ROOT` at an OptiX SDK and install with `BALLASIM_
 
 ## License
 
-[CC BY-NC 4.0](LICENSE): free for non-commercial use with attribution; commercial use needs a separate licence from the authors. Copyright, the patent reservation and how to credit BallaSim are in [NOTICE](NOTICE); third-party components keep their own licences ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The EVIMO2 recordings in the figures appear with the permission of the EVIMO2 authors.
+[CC BY-NC 4.0](LICENSE): free for non-commercial use with attribution; commercial use needs a separate license from the authors. Copyright, the patent reservation and how to credit BallaSim are in [NOTICE](NOTICE); third-party components keep their own licenses ([THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)). The EVIMO2 recordings in the figures appear with the permission of the EVIMO2 authors.
