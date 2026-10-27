@@ -1,7 +1,7 @@
 <h1 align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/site/source/_static/images/dog-dark.png">
-    <img src="docs/site/source/_static/images/dog-light.png" alt="" width="80">
+    <img src="docs/site/source/_static/images/dog-light.png" alt="" width="130">
   </picture>
   BallaSim <sup>Work in Progress</sup>
 </h1>
