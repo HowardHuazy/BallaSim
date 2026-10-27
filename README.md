@@ -1,11 +1,10 @@
-<p align="center">
+<h1 align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="docs/site/source/_static/images/dog-dark.png">
-    <img src="docs/site/source/_static/images/dog-light.png" alt="BallaSim's dog, after Balla" width="320">
+    <img src="docs/site/source/_static/images/dog-light.png" alt="" width="80">
   </picture>
-</p>
-
-<h1 align="center">BallaSim <sup>Work in Progress</sup></h1>
+  BallaSim <sup>Work in Progress</sup>
+</h1>
 
 <p align="center"><b>Event cameras, simulated without frames: every pixel on its own clock, every event with its own timestamp.</b></p>
 
